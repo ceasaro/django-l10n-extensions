@@ -1,5 +1,5 @@
-# about-py
-Django L10N extensions
+# Django L10N extensions
+Django L10N extensions adds some useful L10N extensions to the Django framework
 
  
 # Field types

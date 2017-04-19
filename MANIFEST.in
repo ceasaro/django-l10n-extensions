@@ -1,0 +1,3 @@
+include DESCRIPTION README.md
+recursive-include django-l10n-extenstions/templates *
+recursive-include django-l10n-extenstions/static *

@@ -1,0 +1,11 @@
+{% if can_translate %}
+    <link rel="stylesheet" type="text/css" href="{{ INLINETRANS_STATIC_URL }}css/inlinetrans.css"/>
+    <script language="javascript" src="{{ INLINETRANS_STATIC_URL }}js/jquery.inlinetrans.js"></script>
+{#    <script language="javascript" src="{{ INLINETRANS_STATIC_URL }}js/jquery.jeditable.js"></script>#}
+    <script type="text/javascript">
+        var csrf_token = "{{ csrf_token }}",
+            get_poentry_url= "{{ get_poentry_url }}";
+            update_poentry_url= "{{ update_poentry_url }}";
+
+    </script>
+{% endif %}

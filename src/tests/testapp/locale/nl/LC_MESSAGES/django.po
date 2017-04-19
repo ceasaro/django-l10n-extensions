@@ -1,0 +1,91 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-19 02:58-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: django_l10n_extensions/templates/inlinetrans/inline_toolbar.html:8
+msgid "Give a new translation for "
+msgstr ""
+
+#: django_l10n_extensions/templates/inlinetrans/inline_toolbar.html:8
+msgid "to"
+msgstr ""
+
+#: django_l10n_extensions/templates/inlinetrans/inline_toolbar.html:9
+msgid "You're sending an empty translation ¿Are you sure? "
+msgstr ""
+
+#: django_l10n_extensions/templates/inlinetrans/inline_toolbar.html:10
+msgid "Reloading"
+msgstr ""
+
+#: django_l10n_extensions/templates/inlinetrans/inline_toolbar.html:11
+#: django_l10n_extensions/templates/inlinetrans/inline_toolbar.html:26
+msgid "Apply changes"
+msgstr ""
+
+#: django_l10n_extensions/templates/inlinetrans/inline_toolbar.html:12
+msgid "Applying changes"
+msgstr ""
+
+#: django_l10n_extensions/templates/inlinetrans/inline_toolbar.html:13
+msgid "Can't send translation"
+msgstr ""
+
+#: django_l10n_extensions/templates/inlinetrans/inline_toolbar.html:14
+msgid "Can't restart server"
+msgstr ""
+
+#: django_l10n_extensions/templates/inlinetrans/inline_toolbar.html:24
+msgid "See translatable items"
+msgstr ""
+
+#: django_l10n_extensions/templates/inlinetrans/inline_toolbar.html:25
+msgid "See non translated items"
+msgstr ""
+
+#: tests/conftest.py:12 tests/models/test_fields.py:20
+#: tests/models/test_fields.py:24
+msgid "edit"
+msgstr "bewerken"
+
+#: tests/conftest.py:13
+msgctxt "season"
+msgid "spring"
+msgstr "lente"
+
+#: tests/conftest.py:14
+msgctxt "mechanical device"
+msgid "spring"
+msgstr "veer"
+
+#: tests/conftest.py:15
+msgid "\"double quote\""
+msgstr ""
+
+#: tests/conftest.py:16
+msgid "'single quote'"
+msgstr ""
+
+#: tests/conftest.py:17
+msgid "'single quote' with escaped \"double\""
+msgstr ""
+
+#: tests/conftest.py:18
+msgid "\"double quote\" with exceped 'single'"
+msgstr ""

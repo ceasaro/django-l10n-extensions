@@ -1,0 +1,47 @@
+#_itr_toolbar {
+    background-color: #EB762D;
+    left: 0;
+    padding: 3px 10px;
+    position: fixed;
+    top: 0;
+    z-index: 999999;
+}
+.ui_dialog, #_itr_dialog {
+    border: solid 2px #EB762D;
+    background-color: #C0C0C0;
+
+}
+#_itr_toolbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+#_itr_toolbar ul li {
+    float:left;
+    padding: 0 10px;
+}
+#_itr_toolbar a {
+    display: block;
+    color: #0C0C0C;
+    text-align: center;
+    text-decoration: none;
+}
+#_itr_toolbar a.selected, #_itr_toolbar a:hover {
+    color: #C0C0C0;
+    text-shadow:0px 0px 1px #C0C0C0;
+}
+
+._itr.show {
+    background-color: rgba(255, 255, 0, 0.3) !important;
+    color: #000 !important;
+    cursor: url('../img/translate-cursor.png'), default;
+}
+
+._itr.show.translated {
+    background-color: #90EE90 !important;
+}
+
+._itr.show.untranslated {
+    background-color: #FFC0CB !important;
+}

@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
             name='I18NTestModel',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('i18n_field', django_l10n_extensions.models.fields.I18NField(max_length=128)),
+                ('trans_field', django_l10n_extensions.models.fields.TransField(max_length=128)),
             ],
         ),
     ]

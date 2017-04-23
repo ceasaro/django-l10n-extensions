@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-19 02:58-0500\n"
+"POT-Creation-Date: 2017-04-23 04:32-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -59,8 +59,8 @@ msgstr ""
 msgid "See non translated items"
 msgstr ""
 
-#: tests/conftest.py:12 tests/models/test_fields.py:20
-#: tests/models/test_fields.py:24
+#: tests/conftest.py:12 tests/models/test_fields.py:19
+#: tests/models/test_fields.py:23
 msgid "edit"
 msgstr "bewerken"
 
@@ -88,4 +88,34 @@ msgstr ""
 
 #: tests/conftest.py:18
 msgid "\"double quote\" with exceped 'single'"
+msgstr ""
+
+#: tests/conftest.py:20
+msgid "You bought {} apple"
+msgid_plural "You bought {} apples"
+msgstr[0] ""
+msgstr[1] ""
+
+#: tests/testapp/templates/l10n_extensions/testapp/translate_example.html:10
+#, fuzzy
+#| msgctxt "season"
+#| msgid "spring"
+msgid "Spring"
+msgstr "Lente"
+
+#: tests/testapp/templates/l10n_extensions/testapp/translate_example.html:11
+msgid "Summer"
+msgstr ""
+
+#: tests/testapp/templates/l10n_extensions/testapp/translate_example.html:12
+msgid "Fall"
+msgstr ""
+
+#: tests/testapp/templates/l10n_extensions/testapp/translate_example.html:13
+msgid "Winter"
+msgstr ""
+
+#: tests/testapp/templates/l10n_extensions/testapp/translate_example.html:17
+#, python-format
+msgid "%(count)s springs were shipped"
 msgstr ""

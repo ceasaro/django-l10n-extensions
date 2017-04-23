@@ -17,10 +17,14 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.contrib.auth.views import login, logout
-
+from django.views.generic import TemplateView
 
 urlpatterns = [
     url(r'^login/$', login, {'template_name': 'login.html'}, name="login"),
     url(r'^logout/$', logout, name="logout"),
     url(r'^admin/', admin.site.urls),
+    url(r'^translate_example/', TemplateView.as_view(template_name="l10n_extensions/testapp/translate_example.html"),
+        name="translate example"),
+    url(r'^', TemplateView.as_view(template_name="l10n_extensions/testapp/home.html"),
+        name="home"),
 ]

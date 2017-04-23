@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Django L10N extensions - {% block page_title %}{% endblock %}</title>
+</head>
+<body>
+<h1>{% block title %}Django L10N extensions{% endblock %}</h1>
+<div id="menu">
+    <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'translate example' %}">Translate example</a></li>
+    </ul>
+</div>
+<div id="page_content">
+    {% block page_content %}{% endblock %}
+</div>
+</body>
+</html>

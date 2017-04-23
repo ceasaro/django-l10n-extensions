@@ -24,7 +24,7 @@ class I18N(object):
         self.__str__()
 
 
-class I18NField(models.CharField):
+class TransField(models.CharField):
 
     def from_db_value(self, value, expression, connection, context):
         if value is None:

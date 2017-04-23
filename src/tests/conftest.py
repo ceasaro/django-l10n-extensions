@@ -1,4 +1,4 @@
-from django.utils.translation import pgettext, gettext
+from django.utils.translation import pgettext, gettext, ngettext
 
 def _reload(instance):
     """
@@ -16,3 +16,5 @@ def setup_translations():
     gettext("'single quote'")
     gettext("'single quote' with escaped \"double\"")
     gettext('"double quote" with exceped \'single\'')
+    count = 3
+    ngettext("You bought {} apple", "You bought {} apples", count)

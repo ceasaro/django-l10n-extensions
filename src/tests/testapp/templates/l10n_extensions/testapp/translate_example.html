@@ -1,0 +1,18 @@
+{% extends "l10n_extensions/testapp/base.html" %}
+{% load i18n %}
+{% block page_title %}translate example{% endblock %}
+{% block title %}Translate example{% endblock %}
+
+{% block page_content %}
+<div>
+    <h3>Choose your season</h3>
+    <ul>
+        <li><label for="season_spring"></label><input type="checkbox" id="season_spring">{% trans 'Spring' %}</li>
+        <li><label for="season_summer"></label><input type="checkbox" id="season_spring">{% trans 'Summer' %}</li>
+        <li><label for="season_fall"></label><input type="checkbox" id="season_spring">{% trans 'Fall' %}</li>
+        <li><label for="season_winter"></label><input type="checkbox" id="season_spring">{% trans 'Winter' %}</li>
+    </ul>
+</div>
+
+    {% blocktrans with count=42 %}{{ count }} springs were shipped{% endblocktrans %}
+{% endblock %}

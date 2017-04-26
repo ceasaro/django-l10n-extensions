@@ -1,11 +1,3 @@
-# First of all load and configure the django test app
-import os
-import django
-
-
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "tests.testapp.settings")
-django.setup()
-
 import pytest
 from django.utils.translation import activate, deactivate
 from django.utils.translation import gettext as _

@@ -130,7 +130,7 @@ class DistanceField(BaseMeasureField):
 
 class AreaField(BaseMeasureField):
     measure_class = measures.Area
-    DEFAULT_UNIT = measures.Area.HECTARE
+    DEFAULT_UNIT = measures.Area.DEFAULT_UNIT
 
     def formfield(self, **kwargs):
         defaults = {'form_class': fields.AreaFormField}

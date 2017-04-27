@@ -1,7 +1,7 @@
 # coding=utf-8
 from copy import deepcopy
 
-from django.contrib.gis.measure import MeasureBase, NUMERIC_TYPES, Distance as GisDistance, Area as GisArea
+from django.contrib.gis.measure import MeasureBase, NUMERIC_TYPES, Distance as GisDistance, Area as GisArea, AREA_PREFIX
 from django.utils import six
 from django.utils.formats import number_format
 
@@ -91,11 +91,13 @@ class Distance(MeasureL10nBase, GisDistance):
 
 
 class Area(MeasureL10nBase, GisArea):
+    SQUARE_METER = AREA_PREFIX + Distance.METER
+    SQUARE_FOOT = AREA_PREFIX + Distance.FOOT
     ACRE = u'acre'
     FEDDAN = u'feddan'
     HECTARE = u'ha'
     MU = u'mu'
-    DEFAULT_UNIT = HECTARE
+    DEFAULT_UNIT = AREA_PREFIX + Distance.STANDARD_UNIT
 
     UNITS = GisArea.UNITS.copy()
     UNITS.update({
@@ -119,12 +121,90 @@ class Area(MeasureL10nBase, GisArea):
         FEDDAN: u'feddan',
     }
 
-    def __init__(self, value=None, default_unit=DEFAULT_UNIT, decimal_pos=4, **kwargs):
+    def __init__(self, value=None, default_unit=DEFAULT_UNIT, decimal_pos=1, **kwargs):
         super(Area, self).__init__(value, default_unit, decimal_pos=decimal_pos, **kwargs)
 
     def get_unit(self):
         l10n = get_l10n()
         unit = l10n.unit_area if l10n else self._default_unit
+        return unit
+
+
+# mass
+# 1000 g = 0,00220462 lb = 2 kati
+class Mass(MeasureL10nBase):
+    GRAM = u'g'
+    KG = u'kg'
+    TON = u'ton'
+    POUND = u'lb'
+    SHORT_TON = u'short ton'
+    MARKET_CATTY = u'市斤'
+
+    DEFAULT_UNIT = GRAM
+    STANDARD_UNIT = GRAM  # this is the base unit and its value is used to recalculate other unit values
+    UNITS = {
+        GRAM: 1,
+        KG: 1000,
+        TON: 1000000,
+        POUND: 453.59237,
+        SHORT_TON: 907184.75,
+        MARKET_CATTY: 500,
+    }
+    ALIAS = {
+        u'gram': GRAM,
+        u'kilogram': KG,
+        u'tonne': TON,
+        u'US_ton': SHORT_TON,
+        u'short_ton': SHORT_TON,
+        u'lbm': POUND,
+        u'pound': POUND,
+        u'kati': MARKET_CATTY,
+    }
+    LALIAS = {k.lower(): v for k, v in ALIAS.items()}
+    UNITS_REPR = {
+        GRAM: u'g',
+        KG: u'kg',
+        TON: u'ton',
+        POUND: u'lb',
+        SHORT_TON: u'short ton',
+        MARKET_CATTY: u'市斤',
+    }
+
+    def get_unit(self):
+        l10n = get_l10n()
+        unit = l10n.unit_mass if l10n else self._default_unit
+        return unit
+
+
+# volume
+# 1 l = 0,264172 gal = 2,11338 pt = 33,814 oz
+class Volume(MeasureL10nBase):
+    LITER = u'l'
+    GALLON = u'gal'
+    ML = u'ml'
+
+    DEFAULT_UNIT = LITER
+    STANDARD_UNIT = LITER # this is the base unit and its value is used to recalculate other unit values
+    UNITS = {
+        LITER: 1,
+        GALLON: 3.78541178,
+        ML: 0.001,
+    }
+    ALIAS = {
+        u'liter': LITER,
+        u'gallon': GALLON,
+        u'milliliter': ML,
+    }
+    LALIAS = {k.lower(): v for k, v in ALIAS.items()}
+    UNITS_REPR = {
+        LITER: u'l',
+        GALLON: u'gal',
+        ML: u'ml',
+    }
+
+    def get_unit(self):
+        l10n = get_l10n()
+        unit = l10n.unit_volume if l10n else self._default_unit
         return unit
 
 
@@ -249,80 +329,3 @@ class Precipitation(MeasureL10nBase):
         unit = l10n.unit_precipitation if l10n else self._default_unit
         return unit
 
-
-# mass
-# 1000 g = 0,00220462 lb = 2 kati
-class Mass(MeasureL10nBase):
-    GRAM = u'g'
-    KG = u'kg'
-    TON = u'ton'
-    POUND = u'lb'
-    SHORT_TON = u'short ton'
-    MARKET_CATTY = u'市斤'
-
-    DEFAULT_UNIT = KG
-    STANDARD_UNIT = GRAM  # this is the base unit and its value is used to recalculate other unit values
-    UNITS = {
-        GRAM: 1,
-        KG: 1000,
-        TON: 1000000,
-        POUND: 453.59237,
-        SHORT_TON: 907184.75,
-        MARKET_CATTY: 500,
-    }
-    ALIAS = {
-        u'gram': GRAM,
-        u'kilogram': KG,
-        u'tonne': TON,
-        u'US_ton': SHORT_TON,
-        u'short_ton': SHORT_TON,
-        u'lbm': POUND,
-        u'pound': POUND,
-        u'kati': MARKET_CATTY,
-    }
-    LALIAS = {k.lower(): v for k, v in ALIAS.items()}
-    UNITS_REPR = {
-        GRAM: u'g',
-        KG: u'kg',
-        TON: u'ton',
-        POUND: u'lb',
-        SHORT_TON: u'short ton',
-        MARKET_CATTY: u'市斤',
-    }
-
-    def get_unit(self):
-        l10n = get_l10n()
-        unit = l10n.unit_mass if l10n else self._default_unit
-        return unit
-
-
-# volume
-# 1 l = 0,264172 gal = 2,11338 pt = 33,814 oz
-class Volume(MeasureL10nBase):
-    LITER = u'l'
-    GALLON = u'gal'
-    ML = u'ml'
-
-    DEFAULT_UNIT = LITER
-    STANDARD_UNIT = LITER # this is the base unit and its value is used to recalculate other unit values
-    UNITS = {
-        LITER: 1,
-        GALLON: 3.78541178,
-        ML: 0.001,
-    }
-    ALIAS = {
-        u'liter': LITER,
-        u'gallon': GALLON,
-        u'milliliter': ML,
-    }
-    LALIAS = {k.lower(): v for k, v in ALIAS.items()}
-    UNITS_REPR = {
-        LITER: u'l',
-        GALLON: u'gal',
-        ML: u'ml',
-    }
-
-    def get_unit(self):
-        l10n = get_l10n()
-        unit = l10n.unit_volume if l10n else self._default_unit
-        return unit

@@ -96,11 +96,12 @@ class L10n(models.Model):
         }
 
 
-DEFAULT_L10N = L10n(unit_area=measures.Area.HECTARE,
-                    unit_distance=measures.Distance.METER,
-                    unit_temp=measures.Temperature.CELSIUS,
-                    unit_mass=measures.Mass.KG,
-                    unit_volume=measures.Volume.LITER,
-                    unit_windspeed=measures.Speed.MPS,
-                    unit_precipitation=measures.Precipitation.MM
-                    )
+DEFAULT_L10N = L10n(
+    unit_distance=measures.Distance.METER,
+    unit_area=measures.Area.SQUARE_METER,
+    unit_mass=measures.Mass.GRAM,
+    unit_volume=measures.Volume.LITER,
+    unit_temp=measures.Temperature.CELSIUS,
+    unit_windspeed=measures.Speed.MPS,
+    unit_precipitation=measures.Precipitation.MM
+)

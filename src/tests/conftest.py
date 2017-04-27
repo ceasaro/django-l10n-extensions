@@ -1,7 +1,7 @@
 # First of all load and configure the django test app
 import os
-import django
 
+import django
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "tests.testapp.settings")
 django.setup()
@@ -36,35 +36,38 @@ def setup_translations():
 
 @pytest.fixture
 def l10n_nl():
-    return L10n(unit_area=measures.Area.HECTARE,
-                unit_distance=measures.Distance.METER,
-                unit_temp=measures.Temperature.CELSIUS,
-                unit_windspeed=measures.Speed.MPS,
-                unit_precipitation=measures.Precipitation.MM,
-                unit_volume=measures.Volume.LITER,
-                unit_mass=measures.Mass.KG,
-                )
+    return L10n(
+        unit_distance=measures.Distance.METER,
+        unit_area=measures.Area.SQUARE_METER,
+        unit_volume=measures.Volume.LITER,
+        unit_mass=measures.Mass.GRAM,
+        unit_temp=measures.Temperature.CELSIUS,
+        unit_windspeed=measures.Speed.MPS,
+        unit_precipitation=measures.Precipitation.MM,
+    )
 
 
 @pytest.fixture
 def l10n_us():
-    return L10n(unit_area=measures.Area.ACRE,
-                unit_distance=measures.Distance.FOOT,
-                unit_temp=measures.Temperature.FAHRENHEIT,
-                unit_windspeed=measures.Speed.MPH,
-                unit_precipitation=measures.Precipitation.INCH,
-                unit_volume=measures.Volume.GALLON,
-                unit_mass=measures.Mass.POUND,
-                )
+    return L10n(
+        unit_distance=measures.Distance.FOOT,
+        unit_area=measures.Area.SQUARE_FOOT,
+        unit_volume=measures.Volume.GALLON,
+        unit_mass=measures.Mass.POUND,
+        unit_temp=measures.Temperature.FAHRENHEIT,
+        unit_windspeed=measures.Speed.MPH,
+        unit_precipitation=measures.Precipitation.INCH,
+    )
 
 
 @pytest.fixture
 def l10n_eg():
-    return L10n(unit_area=measures.Area.FEDDAN,
-                unit_distance=measures.Distance.METER,
-                unit_temp=measures.Temperature.CELSIUS,
-                unit_windspeed=measures.Speed.MPS,
-                unit_precipitation=measures.Precipitation.MM,
-                unit_volume=measures.Volume.LITER,
-                unit_mass=measures.Mass.KG,
-                )
+    return L10n(
+        unit_distance=measures.Distance.METER,
+        unit_area=measures.Area.FEDDAN,
+        unit_volume=measures.Volume.LITER,
+        unit_mass=measures.Mass.GRAM,
+        unit_temp=measures.Temperature.CELSIUS,
+        unit_windspeed=measures.Speed.MPS,
+        unit_precipitation=measures.Precipitation.MM,
+    )

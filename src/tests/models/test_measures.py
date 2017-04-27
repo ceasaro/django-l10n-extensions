@@ -20,8 +20,8 @@ def test_compare_area_operations():
     assert area_1 > Area(ha=2)
     assert area_1 < Area(ha=22)
 
-    area_sum = sum([Area(sq_m=3), Area(5), Area(2)])
-    assert area_sum.ha == 7.0003
+    area_sum = sum([Area(ha=3), Area(5), Area(2)])
+    assert area_sum.ha == 3.0007
 
     assert abs(round(Area(1).l10n_value / 3, 2) - 0.33) <  0.0001
 
@@ -39,8 +39,8 @@ def test_constructors(l10n_us):
 
 
 def test_mass():
-    assert Mass(1).kg == 1
-    assert Mass(g=1).kg == 0.001
+    assert Mass(1).g == 1
+    assert Mass(kg=1).g == 1000
     assert abs(Mass(kg=4.5).us_ton - 0.0049604009) < 0.00001
     assert abs(Mass(kg=4.5).short_ton - 0.0049604009) < 0.00001
     assert Mass(lb=4.5).pound == 4.5

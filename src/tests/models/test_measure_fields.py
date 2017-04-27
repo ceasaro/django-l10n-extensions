@@ -12,14 +12,15 @@ from tests.testapp.models import MeasuresTestModel
 @pytest.mark.django_db
 def test_area(l10n_nl):
     activate_l10n(l10n_nl)
-    units = MeasuresTestModel.objects.create(area=24, height=43, temp=18)
+    units = MeasuresTestModel.objects.create(area=240000, height=43, temp=18)
     units = _reload(units)
     activate_lang('nl')
+    assert units.area.sq_m == 240000
     assert units.area.ha == 24
     assert units.area.hectare == 24
-    assert units.area.l10n == '24.0000 ha'
-    assert units.area.as_l10n(decimal_pos=0) == '24 ha'
-    assert units.area.default_value == 24
+    assert units.area.l10n == '240000.0 sq_m'
+    assert units.area.as_l10n(decimal_pos=0) == '240000 sq_m'
+    assert units.area.default_value == 240000
     assert units.height.default_value == 43
 
     # change language, punctuation should alter
@@ -27,8 +28,8 @@ def test_area(l10n_nl):
     units.area = 11
     units.save()
     units = _reload(units)
-    assert units.area.ha == 11
-    assert units.area.l10n == '11.0000 ha'
+    assert units.area.sq_m == 11
+    assert units.area.l10n == '11.0 sq_m'
 
 
 @pytest.mark.django_db
@@ -78,13 +79,13 @@ def test_l10n(l10n_nl, l10n_us, l10n_eg):
     # us
     activate_lang('en')
     activate_l10n(l10n_nl)
-    units = MeasuresTestModel.objects.create(area=24, height=43, temp=0)
+    units = MeasuresTestModel.objects.create(area=Area(ha=24), height=43, temp=0)
     activate_l10n(l10n_us)
     units = _reload(units)
-    assert units.area.l10n == '59.3040 acre'
-    assert abs(units.area.l10n_value - 59.3040) < 0.0001
-    assert units.area.l10n_unit == 'acre'
-    assert abs(units.area.default_value - 24.0000) < 0.0001
+    assert units.area.l10n == '2583338.5 sq_ft'
+    assert abs(units.area.l10n_value - 2583338.5) < 0.01
+    assert units.area.l10n_unit == 'sq_ft'
+    assert abs(units.area.default_value - 240000) < 0.1
 
     assert units.height.l10n == '141.07 ft'
     assert abs(units.height.default_value - 43.00) < 0.01
@@ -96,7 +97,7 @@ def test_l10n(l10n_nl, l10n_us, l10n_eg):
 
     # eg
     activate_l10n(l10n_eg)
-    assert units.area.l10n == '57.1440 feddan'
+    assert units.area.l10n == '57.1 feddan'
     assert units.height.l10n == '43.00 m'
     assert units.temp.l10n == u'0.00 °C'
     deactivate_l10n()
@@ -109,7 +110,7 @@ def test_store():
     assert units.area.ha == 1
     assert units.area.sq_km == 0.01
 
-    units.area = 2
+    units.area = 20000
     units.save()
     units = _reload(units)
     assert units.area.ha == 2
@@ -127,7 +128,7 @@ def test_store_l10n(l10n_us):
     # set country to US, so values are stored in non default units.
     activate_l10n(l10n_us)
     # store values in the currently active unit.
-    units = MeasuresTestModel.objects.create(area=24, height=43, temp=0)
+    units = MeasuresTestModel.objects.create(area=1045462.7681142587, height=43, temp=0)
     units = _reload(units)
     assert abs(units.area.acre - 24) < 0.0001
     assert abs(units.area.ha - 9.7127) < 0.0001
@@ -136,7 +137,7 @@ def test_store_l10n(l10n_us):
     assert abs(units.temp.F - 0.00) < 0.01
     assert abs(units.temp.C - -17.78) < 0.01
     # default values should return the value of the default unit.
-    assert abs(units.area.default_value - 9.7127) < 0.0001
+    assert abs(units.area.default_value - 97126.66936) < 0.0001
     assert abs(units.height.default_value - 13.11) < 0.01
     assert abs(units.temp.default_value - -17.78) < 0.01
     deactivate_l10n()

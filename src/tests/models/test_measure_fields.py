@@ -1,6 +1,5 @@
 # coding=utf-8
 import pytest
-from django.utils.translation import activate as activate_lang
 
 from django_l10n_extensions.l10n_threading import activate as activate_l10n, deactivate as deactivate_l10n
 from django_l10n_extensions.models.measures import Distance, Area
@@ -14,7 +13,6 @@ def test_area(l10n_nl):
     activate_l10n(l10n_nl)
     units = MeasuresTestModel.objects.create(area=240000, height=43, temp=18)
     units = _reload(units)
-    activate_lang('nl')
     assert units.area.sq_m == 240000
     assert units.area.ha == 24
     assert units.area.hectare == 24
@@ -22,14 +20,6 @@ def test_area(l10n_nl):
     assert units.area.as_l10n(decimal_pos=0) == '240000 sq_m'
     assert units.area.default_value == 240000
     assert units.height.default_value == 43
-
-    # change language, punctuation should alter
-    activate_lang('en')
-    units.area = 11
-    units.save()
-    units = _reload(units)
-    assert units.area.sq_m == 11
-    assert units.area.l10n == '11.0 sq_m'
 
 
 @pytest.mark.django_db
@@ -75,35 +65,6 @@ def test_temperature(l10n_nl, l10n_us):
 
 
 @pytest.mark.django_db
-def test_l10n(l10n_nl, l10n_us, l10n_eg):
-    # us
-    activate_lang('en')
-    activate_l10n(l10n_nl)
-    units = MeasuresTestModel.objects.create(area=Area(ha=24), height=43, temp=0)
-    activate_l10n(l10n_us)
-    units = _reload(units)
-    assert units.area.l10n == '2583338.5 sq_ft'
-    assert abs(units.area.l10n_value - 2583338.5) < 0.01
-    assert units.area.l10n_unit == 'sq_ft'
-    assert abs(units.area.default_value - 240000) < 0.1
-
-    assert units.height.l10n == '141.07 ft'
-    assert abs(units.height.default_value - 43.00) < 0.01
-
-    assert units.temp.l10n == u'32.00 °F'
-    assert units.temp.l10n_value == 32.00
-    assert units.temp.l10n_unit == u'°F'
-    assert abs(units.temp.default_value - 0.00) < 0.01
-
-    # eg
-    activate_l10n(l10n_eg)
-    assert units.area.l10n == '57.1 feddan'
-    assert units.height.l10n == '43.00 m'
-    assert units.temp.l10n == u'0.00 °C'
-    deactivate_l10n()
-
-
-@pytest.mark.django_db
 def test_store():
     units = MeasuresTestModel.objects.create(area=Area(ha=1))
     units = _reload(units)
@@ -132,13 +93,13 @@ def test_store_l10n(l10n_us):
     units = _reload(units)
     assert abs(units.area.acre - 24) < 0.0001
     assert abs(units.area.ha - 9.7127) < 0.0001
-    assert units.height.ft == 43
-    assert abs(units.height.m - 13.11) < 0.01
+    assert units.height.yard == 43
+    assert abs(units.height.m - 39.3192) < 0.001
     assert abs(units.temp.F - 0.00) < 0.01
     assert abs(units.temp.C - -17.78) < 0.01
     # default values should return the value of the default unit.
     assert abs(units.area.default_value - 97126.66936) < 0.0001
-    assert abs(units.height.default_value - 13.11) < 0.01
+    assert abs(units.height.default_value - 39.3192) < 0.01
     assert abs(units.temp.default_value - -17.78) < 0.01
     deactivate_l10n()
 

@@ -26,12 +26,9 @@ def test_compare_area_operations():
     assert abs(round(Area(1).l10n_value / 3, 2) - 0.33) <  0.0001
 
 
-def test_constructors(l10n_us):
+def test_constructors():
     assert Distance(3).m == 3
     assert Distance(m=4).m == 4
-    activate_l10n(l10n_us)
-    assert abs(Distance(5).m - 1.524) < 0.001
-    deactivate_l10n()
 
     assert Distance({'unit':'m', 'value':3}).m, 3
     with pytest.raises(ValueError):

@@ -79,6 +79,7 @@ class MeasureL10nBase(MeasureBase):
 class Distance(MeasureL10nBase, GisDistance):
     METER = u'm'
     FOOT = u'ft'
+    YARD = u'yard'
     DEFAULT_UNIT = METER
 
     def __init__(self, value=None, default_unit=DEFAULT_UNIT, **kwargs):

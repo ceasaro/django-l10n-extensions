@@ -50,7 +50,7 @@ def l10n_nl():
 @pytest.fixture
 def l10n_us():
     return L10n(
-        unit_distance=measures.Distance.FOOT,
+        unit_distance=measures.Distance.YARD,
         unit_area=measures.Area.SQUARE_FOOT,
         unit_volume=measures.Volume.GALLON,
         unit_mass=measures.Mass.POUND,

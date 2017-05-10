@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-23 04:32-0500\n"
+"POT-Creation-Date: 2017-05-10 03:52-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -59,63 +59,62 @@ msgstr ""
 msgid "See non translated items"
 msgstr ""
 
-#: tests/conftest.py:12 tests/models/test_fields.py:19
-#: tests/models/test_fields.py:23
+#: tests/conftest.py:26 tests/models/test_trans_fields.py:11
+#: tests/models/test_trans_fields.py:15
 msgid "edit"
 msgstr "bewerken"
 
-#: tests/conftest.py:13
+#: tests/conftest.py:27
 msgctxt "season"
 msgid "spring"
 msgstr "lente"
 
-#: tests/conftest.py:14
+#: tests/conftest.py:28
 msgctxt "mechanical device"
 msgid "spring"
 msgstr "veer"
 
-#: tests/conftest.py:15
+#: tests/conftest.py:29
 msgid "\"double quote\""
 msgstr ""
 
-#: tests/conftest.py:16
+#: tests/conftest.py:30
 msgid "'single quote'"
 msgstr ""
 
-#: tests/conftest.py:17
+#: tests/conftest.py:31
 msgid "'single quote' with escaped \"double\""
 msgstr ""
 
-#: tests/conftest.py:18
+#: tests/conftest.py:32
 msgid "\"double quote\" with exceped 'single'"
 msgstr ""
 
-#: tests/conftest.py:20
+#: tests/conftest.py:34
 msgid "You bought {} apple"
 msgid_plural "You bought {} apples"
 msgstr[0] ""
 msgstr[1] ""
 
-#: tests/testapp/templates/l10n_extensions/testapp/translate_example.html:10
-#, fuzzy
+#: tests/testapp/templates/l10n_extensions/testapp/translate_example.html:23
 #| msgctxt "season"
 #| msgid "spring"
 msgid "Spring"
 msgstr "Lente"
 
-#: tests/testapp/templates/l10n_extensions/testapp/translate_example.html:11
+#: tests/testapp/templates/l10n_extensions/testapp/translate_example.html:24
 msgid "Summer"
-msgstr ""
+msgstr "Zomer"
 
-#: tests/testapp/templates/l10n_extensions/testapp/translate_example.html:12
+#: tests/testapp/templates/l10n_extensions/testapp/translate_example.html:25
 msgid "Fall"
-msgstr ""
+msgstr "Herfst"
 
-#: tests/testapp/templates/l10n_extensions/testapp/translate_example.html:13
+#: tests/testapp/templates/l10n_extensions/testapp/translate_example.html:26
 msgid "Winter"
-msgstr ""
+msgstr "Winter"
 
-#: tests/testapp/templates/l10n_extensions/testapp/translate_example.html:17
+#: tests/testapp/templates/l10n_extensions/testapp/translate_example.html:30
 #, python-format
 msgid "%(count)s springs were shipped"
-msgstr ""
+msgstr "%(count)s veren zijn verstuurd"

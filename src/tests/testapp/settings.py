@@ -8,20 +8,25 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.admin',
     'django.contrib.sessions',
+    'django_extensions',
     'django_l10n_extensions',
     'tests.testapp',
 ]
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
+PROJECT_DIR = os.path.abspath(os.path.dirname(__file__))
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': ':memory:',
+        'NAME': os.path.join(PROJECT_DIR, 'l10n_extensions.db'),
+        # 'NAME': ':memory:',
     }
 }
 
@@ -55,3 +60,8 @@ TESTAPP_DIR = os.path.dirname(__file__)
 LOCALE_PATHS = [
     os.path.join(TESTAPP_DIR, 'locale'),
 ]
+L10N = True
+LANGUAGES = (
+    ('nl', u'Nederlands'),
+    ('en', u'English'),
+)

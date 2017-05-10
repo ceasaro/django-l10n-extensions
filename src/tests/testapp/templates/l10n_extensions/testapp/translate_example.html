@@ -1,9 +1,23 @@
 {% extends "l10n_extensions/testapp/base.html" %}
-{% load i18n %}
+{% load i18n l10n %}
 {% block page_title %}translate example{% endblock %}
 {% block title %}Translate example{% endblock %}
 
 {% block page_content %}
+    <div>
+        {% get_current_language as LANGUAGE_CODE %}
+        {% get_available_languages as LANGUAGES %}
+        <form action="{% url 'set_language' %}" method="post">
+            {% csrf_token %}
+            <input name="next" type="hidden" value="{{request.path}}"/>
+            <select name="language" >
+                {% for lang in LANGUAGES %}
+                    <option {% if lang.0 == LANGUAGE_CODE %}selected="selected"{% endif %} value="{{ lang.0 }}">{{ lang.1 }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Set lang</button>
+        </form>
+    </div>
 <div>
     <h3>Choose your season</h3>
     <ul>
@@ -12,7 +26,18 @@
         <li><label for="season_fall"></label><input type="checkbox" id="season_spring">{% trans 'Fall' %}</li>
         <li><label for="season_winter"></label><input type="checkbox" id="season_spring">{% trans 'Winter' %}</li>
     </ul>
+
+    <div>
+        {% blocktrans with count=42 %}{{ count }} springs were shipped{% endblocktrans %}
+    </div>
+
+    <div>
+        number = {{ 1234567.89|localize }}
+    </div>
+    <div>
+        date = {{ date|localize }}
+    </div>
 </div>
 
-    {% blocktrans with count=42 %}{{ count }} springs were shipped{% endblocktrans %}
+
 {% endblock %}

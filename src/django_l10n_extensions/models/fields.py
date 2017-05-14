@@ -1,31 +1,37 @@
 import json
 
 from django.db import models
-from django.utils.translation import ugettext, pgettext
+from django.utils.translation import ugettext, pgettext, npgettext, ngettext
 
 from django_l10n_extensions.forms import fields
 from django_l10n_extensions.exceptions import L10NException
 from django_l10n_extensions.models import measures
 
 
-class I18N(object):
-    def __init__(self, *args):
-        if len(args) > 2:
-            raise ValueError("Invalid arguments passed")
-        super(I18N, self).__init__()
-        self.msgid = args[-1]  # last argument contains msg id.
-        self.msgctxt = args[0] if len(args) == 2 else None
+class T9N(object):
+    def __init__(self, msgid=None, msgctxt=None, msgid_plural=None, **kwargs):
+        self.msgid = msgid or kwargs.get('i')
+        self.msgid = msgid or kwargs.get('i')
+        self.msgctxt = msgctxt or kwargs.get('c')
+        self.plural = msgid_plural or kwargs.get('p')
+        if not self.msgid:
+            raise ValueError("Invalid arguments passed, need at least a msgid")
 
     def __str__(self):
         if self.msgctxt:
             return pgettext(self.msgctxt, self.msgid)
         return ugettext(self.msgid)
 
+    def trans(self, count):
+        if self.msgctxt:
+            return npgettext(self.msgctxt, self.msgid, self.plural, count)
+        return ngettext(self.msgid, self.plural, count)
+
     def __unicode__(self):
-        self.__str__()
+        return self.__str__()
 
     def __repr__(self):
-        self.__str__()
+        return self.__str__()
 
 
 class TransField(models.CharField):
@@ -33,19 +39,35 @@ class TransField(models.CharField):
     def from_db_value(self, value, expression, connection, context):
         if value is None:
             return None
-        return I18N(*json.loads(value))
+        return T9N(**json.loads(value))
 
     def to_python(self, value):
-        if isinstance(value, I18N) or value is None:
+        if isinstance(value, T9N) or value is None:
             return value
-        return I18N(*json.loads(value))
+        return T9N(**json.loads(value))
 
     def get_prep_value(self, value):
-        if isinstance(value, I18N):
-            return json.dumps([value.msgid])
-        if isinstance(value, (tuple, list)):
-            return json.dumps(value)
-        return json.dumps([value])
+        data = {}
+        if isinstance(value, T9N):
+            data = {'i': T9N.msgid, 'c': T9N.msgctxt, 'p':T9N.msgid_plural}
+        elif isinstance(value, (tuple, list)):
+            l = len(value)
+            if l == 1:
+                data['i'] = value[0]
+            elif l == 2:
+                data['c'] = value[0]
+                data['i'] = value[1]
+            elif l == 3:
+                data['c'] = value[0]
+                data['i'] = value[1]
+                data['p'] = value[2]
+        elif isinstance(value, dict):
+            data['i'] = value.get('msgid') or value.get('i')
+            data['c'] = value.get('msgctxt') or value.get('c')
+            data['p'] = value.get('plural') or value.get('p')
+        else:
+            data['i'] = value
+        return json.dumps(data)
 
 
 class BaseMeasureField(models.FloatField):

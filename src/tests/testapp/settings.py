@@ -63,5 +63,6 @@ LOCALE_PATHS = [
 L10N = True
 LANGUAGES = (
     ('nl', u'Nederlands'),
+    ('fr', u'French'),
     ('en', u'English'),
 )

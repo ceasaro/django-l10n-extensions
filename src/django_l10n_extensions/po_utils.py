@@ -35,7 +35,7 @@ def get_po_libs(locale):
     if locale in po_libs:
         return po_libs[locale]
     po_libs[locale] = []
-    for _po_file in find_pos(lang=locale):
+    for _po_file in find_pos(locale=locale):
         po_libs[locale].append(polib.pofile(_po_file))
     return po_libs[locale]
 
@@ -78,7 +78,7 @@ def get_ordered_path_list(include_djangos):
     return paths
 
 
-def find_pos(lang, include_djangos=False):
+def find_pos(locale, include_djangos=False):
     """
     scans a couple possible repositories of gettext catalogs for the given
     language code
@@ -88,12 +88,12 @@ def find_pos(lang, include_djangos=False):
 
     ret = []
     rx = re.compile(r'(\w+)/../\1')
-    langs = (lang, )
-    if u'-' in lang:
-        _l, _c = map(lambda x: x.lower(), lang.split(u'-'))
+    langs = (locale, )
+    if u'-' in locale:
+        _l, _c = map(lambda x: x.lower(), locale.split(u'-'))
         langs += (u'%s_%s' % (_l, _c), u'%s_%s' % (_l, _c.upper()), )
-    elif u'_' in lang:
-        _l, _c = map(lambda x: x.lower(), lang.split(u'_'))
+    elif u'_' in locale:
+        _l, _c = map(lambda x: x.lower(), locale.split(u'_'))
         langs += (u'%s-%s' % (_l, _c), u'%s-%s' % (_l, _c.upper()), )
 
     for path in paths:
@@ -116,3 +116,32 @@ def get_po_entry(msg_id, po_file=None):
         po_lib = polib.pofile(po_file)
         return po_lib.find(msg_id), po_lib
     return None, None
+
+
+def update_po_file(po_lib, t9n_list=None):
+    if t9n_list:
+        for t9n in t9n_list:
+            msgid = t9n.msgid
+            msgctxt = t9n.msgctxt
+            msgid_plural = t9n.plural
+
+            po_entry = None
+            if msgid:
+                if msgctxt:
+                    po_entry = po_lib.find(msgid, msgctxt=msgctxt)
+                if not msgctxt and not po_entry:
+                    # search for poentry with only a msgid if no msgctxt is available
+                    po_entry = po_lib.find(msgid)
+
+                if not po_entry:
+                    # no po entry found create a new one.
+                    po_entry = polib.POEntry(msgid=msgid, msgctxt=msgctxt, msgid_plural=msgid_plural)
+                    po_lib.append(po_entry)
+
+        po_lib.save()
+
+
+def update_messages(locale, t9n_list=None):
+    libs = get_po_libs(locale)
+    if libs:
+        update_po_file(libs[0], t9n_list=t9n_list)  # update first found po lib

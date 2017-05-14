@@ -16,7 +16,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: django_l10n_extensions/templates/inlinetrans/inline_toolbar.html:8
 msgid "Give a new translation for "
@@ -62,17 +62,17 @@ msgstr ""
 #: tests/conftest.py:26 tests/models/test_trans_fields.py:11
 #: tests/models/test_trans_fields.py:15
 msgid "edit"
-msgstr "bewerken"
+msgstr ""
 
 #: tests/conftest.py:27
 msgctxt "season"
 msgid "spring"
-msgstr "lente"
+msgstr "ressort"
 
 #: tests/conftest.py:28
 msgctxt "mechanical device"
 msgid "spring"
-msgstr "veer"
+msgstr ""
 
 #: tests/conftest.py:29
 msgid "\"double quote\""
@@ -98,30 +98,30 @@ msgstr[1] ""
 
 #: tests/testapp/templates/l10n_extensions/testapp/translate_example.html:24
 msgid "Spring"
-msgstr "Lente"
+msgstr "Printemps"
 
 #: tests/testapp/templates/l10n_extensions/testapp/translate_example.html:25
 msgid "Summer"
-msgstr "Zomer"
+msgstr "Été"
 
 #: tests/testapp/templates/l10n_extensions/testapp/translate_example.html:26
 msgid "Fall"
-msgstr "Herfst"
+msgstr "Automne"
 
 #: tests/testapp/templates/l10n_extensions/testapp/translate_example.html:27
 msgid "Winter"
-msgstr "Winter"
+msgstr "Hiver"
 
 #: tests/testapp/templates/l10n_extensions/testapp/translate_example.html:31
 #, python-format
 msgid "%(count)s springs were shipped"
-msgstr "%(count)s veren zijn verstuurd"
+msgstr "%(count)s ressorts ont été expédiés"
 
 #: tests/testapp/templates/l10n_extensions/testapp/translate_example.html:38
 msgid "car"
 msgid_plural "cars"
-msgstr[0] "auto"
-msgstr[1] "auto's"
+msgstr[0] "voiture"
+msgstr[1] "voitures"
 
 msgid "tree"
 msgstr ""

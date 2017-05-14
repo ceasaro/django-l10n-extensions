@@ -7,6 +7,7 @@ from django_l10n_extensions.models import fields as l10n_fields
 
 class TransTestModel(models.Model):
     trans_field = l10n_fields.TransField(max_length=128)
+    other_trans_field = l10n_fields.TransField(max_length=128)
 
 
 class MeasuresTestModel(models.Model):

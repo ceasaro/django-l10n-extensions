@@ -31,6 +31,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('trans_field', django_l10n_extensions.models.fields.TransField(max_length=128)),
+                ('other_trans_field', django_l10n_extensions.models.fields.TransField(max_length=128)),
             ],
         ),
     ]

@@ -31,9 +31,20 @@
         {% blocktrans with count=42 %}{{ count }} springs were shipped{% endblocktrans %}
     </div>
 
+    <h3>Single vs. Plural</h3>
+    <div>
+        {% for n in numbers %}
+        <ul>
+            {{ n }} {% blocktrans count n as n %}car{% plural %}cars{% endblocktrans %}
+        </ul>
+        {% endfor %}
+    </div>
+
+    <h3>Localize numbers</h3>
     <div>
         number = {{ 1234567.89|localize }}
     </div>
+    <h3>Localize dates</h3>
     <div>
         date = {{ date|localize }}
     </div>

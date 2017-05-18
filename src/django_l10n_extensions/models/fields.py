@@ -45,6 +45,7 @@ class TransField(models.CharField):
         try:
             return T9N(**json.loads(value))
         except ValueError:
+            # db value isn't in json format, assigned the complete string as msgid.
             return T9N(msgid=value)
 
     def get_prep_value(self, value):

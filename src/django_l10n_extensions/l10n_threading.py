@@ -5,12 +5,6 @@ from copy import deepcopy
 _local = threading.local()
 
 
-def merge_l10n(l10n, l10n_to_merge):
-    for key, value in l10n_to_merge.__dict__.items():
-        if value:
-            l10n.__dict__.update({key: value})
-
-
 def get_l10n():
     """
     :return: active l10n. First look in local thread if not present check user localization

@@ -69,9 +69,9 @@ def test_trans_field_plural():
 
 
 @pytest.mark.django_db
-def test_trans_field_plural_with_contxt():
+def test_trans_field_plural_with_context():
     # we need to reload the instance from the db, so django converts the varchar value to a I18N object
-    i18n_spring_device = _reload(TransTestModel.objects.create(trans_field={'i': 'tree', 'p': 'trees', 'c': 'in a wood'}))
+    i18n_spring_device = _reload(TransTestModel.objects.create(trans_field={'i': 'tree', 'p': 'trees', 'c': 'in a forest'}))
     activate('en')
     assert i18n_spring_device.trans_field.trans(0) == 'trees'
     assert i18n_spring_device.trans_field.trans(1) == 'tree'

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-14 11:41-0500\n"
+"POT-Creation-Date: 2017-06-03 11:47-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -75,22 +75,29 @@ msgid "spring"
 msgstr "veer"
 
 #: tests/conftest.py:29
+msgctxt "in a forest"
+msgid "tree"
+msgid_plural "trees"
+msgstr[0] "boom"
+msgstr[1] "bomen"
+
+#: tests/conftest.py:30
 msgid "\"double quote\""
 msgstr ""
 
-#: tests/conftest.py:30
+#: tests/conftest.py:31
 msgid "'single quote'"
 msgstr ""
 
-#: tests/conftest.py:31
+#: tests/conftest.py:32
 msgid "'single quote' with escaped \"double\""
 msgstr ""
 
-#: tests/conftest.py:32
+#: tests/conftest.py:33
 msgid "\"double quote\" with exceped 'single'"
 msgstr ""
 
-#: tests/conftest.py:34
+#: tests/conftest.py:35
 msgid "You bought {} apple"
 msgid_plural "You bought {} apples"
 msgstr[0] ""
@@ -122,12 +129,3 @@ msgid "car"
 msgid_plural "cars"
 msgstr[0] "auto"
 msgstr[1] "auto's"
-
-msgid "tree"
-msgstr ""
-
-msgid "one"
-msgstr ""
-
-msgid "two"
-msgstr ""

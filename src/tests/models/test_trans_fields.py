@@ -19,70 +19,77 @@ def test_sanity_translaiton():
 @pytest.mark.django_db
 def test_trans_field():
     # we need to reload the instance from the db, so django converts the varchar value to a I18N object
-    i18n_model = _reload(TransTestModel.objects.create(trans_field='edit'))
+    t9n_model = _reload(TransTestModel.objects.create(trans_field='edit'))
     activate('en')
-    assert str(i18n_model.trans_field) == 'edit'
-    assert "In a string '{}'".format(i18n_model.trans_field) == "In a string 'edit'"
-    assert i18n_model.trans_field.msgid == 'edit'
+    assert str(t9n_model.trans_field) == 'edit'
+    assert "In a string '{}'".format(t9n_model.trans_field) == "In a string 'edit'"
+    assert t9n_model.trans_field.msgid == 'edit'
     deactivate()
 
     activate('nl')
-    assert str(i18n_model.trans_field) == 'bewerken'
-    assert i18n_model.trans_field.msgid == 'edit'
+    assert str(t9n_model.trans_field) == 'bewerken'
+    assert t9n_model.trans_field.msgid == 'edit'
     deactivate()
 
 
 @pytest.mark.django_db
 def test_trans_field_with_context():
     # we need to reload the instance from the db, so django converts the varchar value to a I18N object
-    i18n_spring_device = _reload(TransTestModel.objects.create(trans_field=('mechanical device', 'spring')))
-    i18n_spring_season = _reload(TransTestModel.objects.create(trans_field=('season', 'spring')))
+    t9n_spring_device = _reload(TransTestModel.objects.create(trans_field=('mechanical device', 'spring')))
+    t9n_spring_season = _reload(TransTestModel.objects.create(trans_field=('season', 'spring')))
     activate('en')
-    assert str(i18n_spring_device.trans_field) == 'spring'
-    assert str(i18n_spring_season.trans_field) == 'spring'
+    assert str(t9n_spring_device.trans_field) == 'spring'
+    assert str(t9n_spring_season.trans_field) == 'spring'
     deactivate()
 
     activate('nl')
-    assert str(i18n_spring_device.trans_field) == 'veer'
-    assert str(i18n_spring_season.trans_field) == 'lente'
+    assert str(t9n_spring_device.trans_field) == 'veer'
+    assert str(t9n_spring_season.trans_field) == 'lente'
     deactivate()
 
 
 @pytest.mark.django_db
 def test_trans_field_plural():
     # we need to reload the instance from the db, so django converts the varchar value to a I18N object
-    i18n_spring_device = _reload(TransTestModel.objects.create(trans_field={'msgid': 'car', 'plural': 'cars'}))
+    t9n_spring_device = _reload(TransTestModel.objects.create(trans_field={'msgid': 'car', 'plural': 'cars'}))
     activate('en')
-    assert i18n_spring_device.trans_field.trans(0) == 'cars'
-    assert i18n_spring_device.trans_field.trans(1) == 'car'
-    assert i18n_spring_device.trans_field.trans(2) == 'cars'
+    assert t9n_spring_device.trans_field.trans(0) == 'cars'
+    assert t9n_spring_device.trans_field.trans(1) == 'car'
+    assert t9n_spring_device.trans_field.trans(2) == 'cars'
 
     activate('nl')
-    assert i18n_spring_device.trans_field.trans(0) == "auto's"
-    assert i18n_spring_device.trans_field.trans(1) == "auto"
-    assert i18n_spring_device.trans_field.trans(2) == "auto's"
+    assert t9n_spring_device.trans_field.trans(0) == "auto's"
+    assert t9n_spring_device.trans_field.trans(1) == "auto"
+    assert t9n_spring_device.trans_field.trans(2) == "auto's"
 
     activate('fr')
-    assert i18n_spring_device.trans_field.trans(0) == "voiture"
-    assert i18n_spring_device.trans_field.trans(1) == "voiture"
-    assert i18n_spring_device.trans_field.trans(2) == "voitures"
+    assert t9n_spring_device.trans_field.trans(0) == "voiture"
+    assert t9n_spring_device.trans_field.trans(1) == "voiture"
+    assert t9n_spring_device.trans_field.trans(2) == "voitures"
 
 
 @pytest.mark.django_db
 def test_trans_field_plural_with_context():
     # we need to reload the instance from the db, so django converts the varchar value to a I18N object
-    i18n_spring_device = _reload(TransTestModel.objects.create(trans_field={'i': 'tree', 'p': 'trees', 'c': 'in a forest'}))
+    t9n_spring_device = _reload(TransTestModel.objects.create(trans_field={'i': 'tree', 'p': 'trees', 'c': 'in a forest'}))
     activate('en')
-    assert i18n_spring_device.trans_field.trans(0) == 'trees'
-    assert i18n_spring_device.trans_field.trans(1) == 'tree'
-    assert i18n_spring_device.trans_field.trans(2) == 'trees'
+    assert t9n_spring_device.trans_field.trans(0) == 'trees'
+    assert t9n_spring_device.trans_field.trans(1) == 'tree'
+    assert t9n_spring_device.trans_field.trans(2) == 'trees'
 
     activate('nl')
-    assert i18n_spring_device.trans_field.trans(0) == "bomen"
-    assert i18n_spring_device.trans_field.trans(1) == "boom"
-    assert i18n_spring_device.trans_field.trans(2) == "bomen"
+    assert t9n_spring_device.trans_field.trans(0) == "bomen"
+    assert t9n_spring_device.trans_field.trans(1) == "boom"
+    assert t9n_spring_device.trans_field.trans(2) == "bomen"
 
     activate('fr')
-    assert i18n_spring_device.trans_field.trans(0) == "arbre"
-    assert i18n_spring_device.trans_field.trans(1) == "arbre"
-    assert i18n_spring_device.trans_field.trans(2) == "arbres"
+    assert t9n_spring_device.trans_field.trans(0) == "arbre"
+    assert t9n_spring_device.trans_field.trans(1) == "arbre"
+    assert t9n_spring_device.trans_field.trans(2) == "arbres"
+
+
+@pytest.mark.django_db
+def test_trans_field_not_assigned():
+    # we need to reload the instance from the db, so django converts the varchar value to a I18N object
+    t9n_model = _reload(TransTestModel.objects.create())
+    assert t9n_model.trans_field == ''

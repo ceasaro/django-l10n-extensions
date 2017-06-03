@@ -8,7 +8,7 @@ django.setup()
 
 # now django is configured continue ...
 import pytest
-from django.utils.translation import pgettext, gettext, ngettext
+from django.utils.translation import pgettext, gettext, ngettext, npgettext
 
 from django_l10n_extensions.models import measures
 from django_l10n_extensions.models.models import L10n
@@ -26,6 +26,7 @@ def setup_translations():
     gettext('edit')
     pgettext('season', 'spring')
     pgettext('mechanical device', 'spring')
+    npgettext('in a forest', 'tree', 'trees', 3)
     gettext('"double quote"')
     gettext("'single quote'")
     gettext("'single quote' with escaped \"double\"")

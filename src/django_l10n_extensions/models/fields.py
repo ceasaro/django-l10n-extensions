@@ -11,7 +11,6 @@ from django_l10n_extensions.models import measures
 class T9N(object):
     def __init__(self, msgid=None, msgctxt=None, msgid_plural=None, **kwargs):
         self.msgid = msgid or kwargs.get('i')
-        self.msgid = msgid or kwargs.get('i')
         self.msgctxt = msgctxt or kwargs.get('c')
         self.plural = msgid_plural or kwargs.get('p')
         if not self.msgid:
@@ -27,6 +26,13 @@ class T9N(object):
             return npgettext(self.msgctxt, self.msgid, self.plural, count)
         return ngettext(self.msgid, self.plural, count)
 
+    def __eq__(self, other):
+        if not other:
+            return False
+        if isinstance(other, self.__class__):
+            return other.msgid == self.msgid and other.msgctxt == self.msgctxt and other.plural == self.plural
+        return False
+
     def __unicode__(self):
         return self.__str__()
 
@@ -40,7 +46,7 @@ class TransField(models.CharField):
         return self.to_python(value)
 
     def to_python(self, value):
-        if isinstance(value, T9N) or value is None:
+        if isinstance(value, T9N) or not value  :
             return value
         try:
             return T9N(**json.loads(value))
@@ -49,6 +55,8 @@ class TransField(models.CharField):
             return T9N(msgid=value)
 
     def get_prep_value(self, value):
+        if not value:
+            return super(TransField, self).get_prep_value(value)
         data = {}
         if isinstance(value, T9N):
             data = {'i': T9N.msgid, 'c': T9N.msgctxt, 'p':T9N.msgid_plural}

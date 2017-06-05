@@ -1,12 +1,14 @@
 # coding=utf-8
 from copy import deepcopy
 
-from django.contrib.gis.measure import MeasureBase, NUMERIC_TYPES, Distance as GisDistance, Area as GisArea, AREA_PREFIX
+from django.contrib.gis.measure import MeasureBase, NUMERIC_TYPES, Distance as GisDistance, Area as GisArea, \
+    AREA_PREFIX, pretty_name
 from django.utils import six
 from django.utils.formats import number_format
 
 from django_l10n_extensions.l10n_threading import get_l10n
 
+VOLUME_PREFIX = 'cu_'
 
 class MeasureL10nBase(MeasureBase):
 
@@ -82,6 +84,12 @@ class Distance(MeasureL10nBase, GisDistance):
     YARD = u'yard'
     DEFAULT_UNIT = METER
 
+    UNITS = GisDistance.UNITS.copy()
+    UNITS.update({
+        'hm': 100,
+        'dm': 100,
+    })
+
     def __init__(self, value=None, default_unit=DEFAULT_UNIT, **kwargs):
         super(Distance, self).__init__(value, default_unit, **kwargs)
 
@@ -89,6 +97,13 @@ class Distance(MeasureL10nBase, GisDistance):
         l10n = get_l10n()
         unit = l10n.unit_distance if l10n else self._default_unit
         return unit
+
+    def __mul__(self, other):
+        if isinstance(other, Area):
+            return Volume(default_unit=VOLUME_PREFIX + self._default_unit,
+                **{VOLUME_PREFIX + self.STANDARD_UNIT: (self.standard * other.standard)})
+        else:
+            return super(Distance, self).__mul__(other)
 
 
 class Area(MeasureL10nBase, GisArea):
@@ -129,6 +144,20 @@ class Area(MeasureL10nBase, GisArea):
         l10n = get_l10n()
         unit = l10n.unit_area if l10n else self._default_unit
         return unit
+
+    def __mul__(self, other):
+        if isinstance(other, Distance):
+            return Volume(default_unit=VOLUME_PREFIX + self._default_unit[len(AREA_PREFIX):],
+                **{VOLUME_PREFIX + self.STANDARD_UNIT[len(AREA_PREFIX): ]: (self.standard * other.standard)})
+        elif isinstance(other, NUMERIC_TYPES):
+            return self.__class__(default_unit=self._default_unit,
+                                  **{self.STANDARD_UNIT: (self.standard * other)})
+        else:
+            raise TypeError('{area} must be multiplied with number or {distance}' % {
+                'area': pretty_name(self.__class__),
+                'distance': pretty_name(Distance),
+            })
+
 
 
 # mass
@@ -181,19 +210,26 @@ class Mass(MeasureL10nBase):
 # 1 l = 0,264172 gal = 2,11338 pt = 33,814 oz
 class Volume(MeasureL10nBase):
     LITER = u'l'
+
     GALLON = u'gal'
+    DL = u'dl'
+    CL = u'cl'
     ML = u'ml'
 
     DEFAULT_UNIT = LITER
-    STANDARD_UNIT = LITER # this is the base unit and its value is used to recalculate other unit values
-    UNITS = {
-        LITER: 1,
-        GALLON: 3.78541178,
-        ML: 0.001,
-    }
+    STANDARD_UNIT = VOLUME_PREFIX + Distance.STANDARD_UNIT  # this is the base unit and its value is used to recalculate other unit values
+    UNITS = {'%s%s' % (VOLUME_PREFIX, k): v ** 2 for k, v in Distance.UNITS.items()}
+    UNITS.update({
+        LITER: 0.001,
+        GALLON: 0.00378541178,
+        CL: 0.00001,
+        ML: 0.000001,
+    })
     ALIAS = {
         u'liter': LITER,
         u'gallon': GALLON,
+        u'deciliter': DL,
+        u'centiliter': CL,
         u'milliliter': ML,
     }
     LALIAS = {k.lower(): v for k, v in ALIAS.items()}

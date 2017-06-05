@@ -2,7 +2,7 @@
 import pytest
 
 from django_l10n_extensions.l10n_threading import activate as activate_l10n, deactivate as deactivate_l10n
-from django_l10n_extensions.models.measures import Distance, Area, Volume, Mass
+from django_l10n_extensions.models.measures import Distance, Area, Volume, Mass, Temperature
 
 
 def test_compare_area_operations():
@@ -49,6 +49,16 @@ def test_volume():
     assert abs(Volume(ml=44).gal - 0.0116235703) < 0.0001
     assert Volume(cu_m=5).l == 5000
     assert Volume(cu_yd=3).cu_yd == 3
+
+
+def test_temperature():
+    assert Temperature(C=5).C == 5
+    assert Temperature(C=5).K == 278.15
+    assert Temperature(C=5).F == 41
+
+    assert Temperature(F=5).C == -15
+    assert Temperature(F=5).K == 258.15
+    assert Temperature(F=5).F == 5
 
 
 def test_add():

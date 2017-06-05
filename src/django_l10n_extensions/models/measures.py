@@ -248,24 +248,29 @@ class Volume(MeasureL10nBase):
 class Temperature(MeasureL10nBase):
     CELSIUS = u'C'
     FAHRENHEIT = u'F'
+    KELVIN = u'K'
 
     DEFAULT_UNIT = CELSIUS
     STANDARD_UNIT = CELSIUS  # this is the base unit and its value is used to recalculate other unit values
     UNITS = {
         CELSIUS: lambda x: x,
         FAHRENHEIT: lambda x: x * 9.0 / 5.0 + 32.0,
+        KELVIN: lambda x: x + 273.15
     }
     UNITS_REVERSE = {
         CELSIUS: lambda x: x,
         FAHRENHEIT: lambda x: (x - 32) / 9.0 * 5.0,
+        KELVIN: lambda x: x - 273.15
     }
     UNITS_REPR = {
         CELSIUS: u'°C',
         FAHRENHEIT: u'°F',
+        KELVIN: u'K',
     }
     ALIAS = {
         u'Celsius': CELSIUS,
         u'Fahrenheit': FAHRENHEIT,
+        u'Kelvin': KELVIN,
     }
     LALIAS = {k.lower(): v for k, v in ALIAS.items()}
 

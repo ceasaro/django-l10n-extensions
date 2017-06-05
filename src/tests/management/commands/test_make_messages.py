@@ -1,6 +1,6 @@
 import pytest
 
-from django_l10n_extensions.management.commands import make_l10n_messages
+from django_l10n_extensions.management.commands import makemessages
 from django_l10n_extensions.models.fields import T9N
 from tests.conftest import _reload
 from tests.testapp.models import TransTestModel
@@ -18,13 +18,13 @@ def test_collect_model_messages():
         collected_messages[locale] = messages
 
     # mock the update_messages with this test version to see which messages are all collected
-    make_l10n_messages.update_messages = mock_update_messages
+    makemessages.update_messages = mock_update_messages
     TransTestModel.objects.create(trans_field=('mechanical device', 'spring'), other_trans_field='hurry')
     TransTestModel.objects.create(trans_field=('one'))
     _reload(TransTestModel.objects.create(trans_field=('one')))
 
     assert collected_messages == {}, "nothing collected yet, should still be empty."
-    make_l10n_messages.Command().collect_model_messages({'locale': ['nl']})
+    makemessages.Command().collect_model_messages({'locale': ['nl']})
     assert collected_messages.keys() == ['nl']
     for t9n in [T9N('spring', msgctxt='mechanical device'), T9N('hurry'), T9N('one'), T9N('one')]:
         assert t9n in collected_messages['nl'], "{} not found in collected messages." \

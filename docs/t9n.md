@@ -4,7 +4,7 @@ This Django model field translates content stored in your database using the sam
  translation methods like `gettext`, `pgettest`, `ngettest` and `npgexttest` 
  (see the [Django 1.11 translation](https://docs.djangoproject.com/en/1.11/topics/i18n/translation/))
  
-Collecting the messages of the `TransField` stored in the database simply run: 
+To Collect the messages of the `TransField` stored in the database simply run: 
   
   `python manage.py makemessages`
  
@@ -20,7 +20,7 @@ _equivalent to Django's `gettext(message)`_
 title = TransField(max_length=128)
 ```
 
-The string from the title model field will be translated like any message pass through the Django's `gettext()` method.
+The string from the title model field will be translated like any message passed through the Django's `gettext()` method.
 Below a complete example:
 ```python   
 class Product(models.Model):
@@ -48,7 +48,7 @@ product.name → 'spring'
 
 activate('nl')
 
-product.name → 'veer'  # for sure!
+product.name → 'veer'  # not Lente cause the context says it's a mechanical device!
 ```
 
 ### translate plural 
@@ -98,7 +98,7 @@ use the same Django management command: `makemessages`
 `python manage.py makemessages`
 
 Running this command will now work the same as the original Django's `makemessages` command but also collects all 
-messages from the `TransField` model fields and add the to the po file.
+messages from the `TransField` model fields and add the to your po file.
 
 If you need to run the original `makemessages` command without colleting the `TransField` messages pass in the following 
 option:
@@ -107,4 +107,4 @@ option:
 
 If you which to only collect the messages of the `TransField` model fields run:
 
-`python manage.py make_l10n_messages`
+`python manage.py makemessages --models-only`

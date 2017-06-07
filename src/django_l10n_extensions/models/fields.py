@@ -170,6 +170,26 @@ class AreaField(BaseMeasureField):
         return super(models.FloatField, self).formfield(**defaults)
 
 
+class WeightField(BaseMeasureField):
+    measure_class = measures.Weight
+    DEFAULT_UNIT = measures.Weight.DEFAULT_UNIT
+
+    def formfield(self, **kwargs):
+        defaults = {'form_class': fields.WeightFormField}
+        defaults.update(kwargs)
+        return super(models.FloatField, self).formfield(**defaults)
+
+
+class VolumeField(BaseMeasureField):
+    measure_class = measures.Volume
+    DEFAULT_UNIT = measures.Volume.DEFAULT_UNIT
+
+    def formfield(self, **kwargs):
+        defaults = {'form_class': fields.VolumeFormField}
+        defaults.update(kwargs)
+        return super(models.FloatField, self).formfield(**defaults)
+
+
 class TemperatureField(BaseMeasureField):
     measure_class = measures.Temperature
     DEFAULT_UNIT = measures.Temperature.CELSIUS
@@ -180,12 +200,12 @@ class TemperatureField(BaseMeasureField):
         return super(models.FloatField, self).formfield(**defaults)
 
 
-class SpeedField(BaseMeasureField):
-    measure_class = measures.Speed
-    DEFAULT_UNIT = measures.Speed.MPS
+class VelocityField(BaseMeasureField):
+    measure_class = measures.Velocity
+    DEFAULT_UNIT = measures.Velocity.MPS
 
     def formfield(self, **kwargs):
-        defaults = {'form_class': fields.SpeedFormField}
+        defaults = {'form_class': fields.VelocityFormField}
         defaults.update(kwargs)
         return super(models.FloatField, self).formfield(**defaults)
 

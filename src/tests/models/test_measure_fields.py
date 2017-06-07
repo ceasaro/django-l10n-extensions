@@ -105,7 +105,7 @@ def test_store_l10n(l10n_us):
 
 
 @pytest.mark.django_db
-def test_windspeed(l10n_nl, l10n_us):
+def test_velocity(l10n_nl, l10n_us):
     activate_l10n(l10n_nl)
     units = MeasuresTestModel.objects.create(windspeed=10)
     units = _reload(units)  # needed to convert int 10 to windspeed(10) in the units object
@@ -113,8 +113,8 @@ def test_windspeed(l10n_nl, l10n_us):
     assert units.windspeed.kmh == 36
     assert abs(units.windspeed.mph - 22.36936) < 0.00001
 
-    assert l10n_nl.unit_windspeed, 'mps'
-    assert l10n_us.unit_windspeed, 'mph'
+    assert l10n_nl.unit_velocity, 'mps'
+    assert l10n_us.unit_velocity, 'mph'
     deactivate_l10n()
 
 

@@ -15,5 +15,5 @@ class MeasuresTestModel(models.Model):
     area = l10n_fields.AreaField(null=True, blank=True)
     height = l10n_fields.DistanceField(null=True, blank=True)
     temp = l10n_fields.TemperatureField(null=True, blank=True)
-    windspeed = l10n_fields.SpeedField(null=True, blank=True)
+    windspeed = l10n_fields.VelocityField(null=True, blank=True)
     precipitation = l10n_fields.PrecipitationField(null=True, blank=True)

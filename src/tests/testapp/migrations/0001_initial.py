@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
                 ('area', django_l10n_extensions.models.fields.AreaField(blank=True, null=True)),
                 ('height', django_l10n_extensions.models.fields.DistanceField(blank=True, null=True)),
                 ('temp', django_l10n_extensions.models.fields.TemperatureField(blank=True, null=True)),
-                ('windspeed', django_l10n_extensions.models.fields.SpeedField(blank=True, null=True)),
+                ('windspeed', django_l10n_extensions.models.fields.VelocityField(blank=True, null=True)),
                 ('precipitation', django_l10n_extensions.models.fields.PrecipitationField(blank=True, null=True)),
             ],
         ),

@@ -15,6 +15,20 @@ class AreaFormField(Field):
         return Area(value)
 
 
+class WeightFormField(Field):
+
+    def to_python(self, value):
+        from django_l10n_extensions.models.measures import Weight
+        return Weight(value)
+
+
+class VolumeFormField(Field):
+
+    def to_python(self, value):
+        from django_l10n_extensions.models.measures import Volume
+        return Volume(value)
+
+
 class TemperatureFormField(Field):
 
     def to_python(self, value):
@@ -22,11 +36,11 @@ class TemperatureFormField(Field):
         return Temperature(value)
 
 
-class SpeedFormField(Field):
+class VelocityFormField(Field):
 
     def to_python(self, value):
-        from django_l10n_extensions.models.measures import Speed
-        return Speed(value)
+        from django_l10n_extensions.models.measures import Velocity
+        return Velocity(value)
 
 class PrecipitationFormField(Field):
 

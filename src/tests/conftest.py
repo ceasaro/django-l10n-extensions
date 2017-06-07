@@ -41,9 +41,9 @@ def l10n_nl():
         unit_distance=measures.Distance.METER,
         unit_area=measures.Area.SQUARE_METER,
         unit_volume=measures.Volume.LITER,
-        unit_mass=measures.Mass.GRAM,
+        unit_weight=measures.Weight.GRAM,
         unit_temp=measures.Temperature.CELSIUS,
-        unit_windspeed=measures.Speed.MPS,
+        unit_velocity=measures.Velocity.MPS,
         unit_precipitation=measures.Precipitation.MM,
     )
 
@@ -54,9 +54,9 @@ def l10n_us():
         unit_distance=measures.Distance.YARD,
         unit_area=measures.Area.SQUARE_FOOT,
         unit_volume=measures.Volume.GALLON,
-        unit_mass=measures.Mass.POUND,
+        unit_weight=measures.Weight.POUND,
         unit_temp=measures.Temperature.FAHRENHEIT,
-        unit_windspeed=measures.Speed.MPH,
+        unit_velocity=measures.Velocity.MPH,
         unit_precipitation=measures.Precipitation.INCH,
     )
 
@@ -67,8 +67,8 @@ def l10n_eg():
         unit_distance=measures.Distance.METER,
         unit_area=measures.Area.FEDDAN,
         unit_volume=measures.Volume.LITER,
-        unit_mass=measures.Mass.GRAM,
+        unit_weight=measures.Weight.GRAM,
         unit_temp=measures.Temperature.CELSIUS,
-        unit_windspeed=measures.Speed.MPS,
+        unit_velocity=measures.Velocity.MPS,
         unit_precipitation=measures.Precipitation.MM,
     )

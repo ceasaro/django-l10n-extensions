@@ -160,9 +160,9 @@ class Area(MeasureL10nBase, GisArea):
 
 
 
-# mass
+# weight
 # 1000 g = 0,00220462 lb = 2 kati
-class Mass(MeasureL10nBase):
+class Weight(MeasureL10nBase):
     GRAM = u'g'
     KG = u'kg'
     TON = u'ton'
@@ -202,7 +202,7 @@ class Mass(MeasureL10nBase):
 
     def get_unit(self):
         l10n = get_l10n()
-        unit = l10n.unit_mass if l10n else self._default_unit
+        unit = l10n.unit_weight if l10n else self._default_unit
         return unit
 
 
@@ -312,7 +312,7 @@ class Temperature(MeasureL10nBase):
         pass
 
 
-class Speed(MeasureL10nBase):
+class Velocity(MeasureL10nBase):
     MPS = u'mps'
     KMH = u'kmh'
     MPH = u'mph'
@@ -338,7 +338,7 @@ class Speed(MeasureL10nBase):
 
     def get_unit(self):
         l10n = get_l10n()
-        unit = l10n.unit_windspeed if l10n else self._default_unit
+        unit = l10n.unit_velocity if l10n else self._default_unit
         return unit
 
 

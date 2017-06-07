@@ -2,7 +2,7 @@
 import pytest
 
 from django_l10n_extensions.l10n_threading import activate as activate_l10n, deactivate as deactivate_l10n
-from django_l10n_extensions.models.measures import Distance, Area, Volume, Mass, Temperature
+from django_l10n_extensions.models.measures import Distance, Area, Volume, Weight, Temperature
 
 
 def test_compare_area_operations():
@@ -35,12 +35,12 @@ def test_constructors():
         assert Distance({'distance':'m', 'value':3}).m == 3
 
 
-def test_mass():
-    assert Mass(1).g == 1
-    assert Mass(kg=1).g == 1000
-    assert abs(Mass(kg=4.5).us_ton - 0.0049604009) < 0.00001
-    assert abs(Mass(kg=4.5).short_ton - 0.0049604009) < 0.00001
-    assert Mass(lb=4.5).pound == 4.5
+def test_weieght():
+    assert Weight(1).g == 1
+    assert Weight(kg=1).g == 1000
+    assert abs(Weight(kg=4.5).us_ton - 0.0049604009) < 0.00001
+    assert abs(Weight(kg=4.5).short_ton - 0.0049604009) < 0.00001
+    assert Weight(lb=4.5).pound == 4.5
 
 
 def test_volume():
@@ -64,7 +64,7 @@ def test_temperature():
 def test_add():
     assert Volume(l=1) + Volume(ml=100) == Volume(l=1.1)
     with pytest.raises(TypeError):
-        assert Volume(l=1) + Mass(kg=1), 'can not add up Volumes and Masses'
+        assert Volume(l=1) + Weight(kg=1), 'can not add up Volumes and Weight'
     assert Distance(5) + Distance(hm=5) == Distance(m=505)
     with pytest.raises(TypeError):
         assert Distance(km=3) + 4, 'can not add plain numeric values (in what unit is the numeric value?'

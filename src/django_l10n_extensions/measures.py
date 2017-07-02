@@ -165,6 +165,7 @@ class Area(MeasureL10nBase, GisArea):
 class Weight(MeasureL10nBase):
     GRAM = u'g'
     KG = u'kg'
+    MG = u'mg'
     TON = u'ton'
     POUND = u'lb'
     SHORT_TON = u'short ton'
@@ -175,6 +176,7 @@ class Weight(MeasureL10nBase):
     UNITS = {
         GRAM: 1,
         KG: 1000,
+        MG: 0.001,
         TON: 1000000,
         POUND: 453.59237,
         SHORT_TON: 907184.75,
@@ -183,6 +185,7 @@ class Weight(MeasureL10nBase):
     ALIAS = {
         u'gram': GRAM,
         u'kilogram': KG,
+        u'milligram': MG,
         u'tonne': TON,
         u'US_ton': SHORT_TON,
         u'short_ton': SHORT_TON,
@@ -194,6 +197,7 @@ class Weight(MeasureL10nBase):
     UNITS_REPR = {
         GRAM: u'g',
         KG: u'kg',
+        MG: u'mg',
         TON: u'ton',
         POUND: u'lb',
         SHORT_TON: u'short ton',

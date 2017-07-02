@@ -7,6 +7,8 @@ extensions. If you are interested some more background information about localiz
 
 This library extends your Django framework with translatable model fields, international unit measure fields, and more!
 
+Interested in the source code check out our [repo on github](https://github.com/ceasaro/django-l10n-extensions).
+
 ## Getting started
 
 You can get django-l10n-extensions using [pip](https://packaging.python.org/current/)

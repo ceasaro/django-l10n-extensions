@@ -26,3 +26,6 @@ trello_settings.py
 
 # pytest
 .cache
+
+#mkdocs
+site/

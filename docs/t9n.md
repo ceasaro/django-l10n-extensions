@@ -8,8 +8,8 @@ To Collect the messages of the `TransField` stored in the database simply run:
   
   `python manage.py makemessages`
  
-__!NOTE__ This is not meant to translate user generated content but more for static text stored in a database, think of 
-a list of products are some definition list that needs to be translated. There are other libraries probably more 
+__!NOTE__ This is not meant to translate user generated content, it's more suitable for static text stored in a database.
+Think of a list of products or some definition list that needs to be translated. There are other libraries probably more 
 suitable for translating user generated content take a look a these 
 [libraries](https://djangopackages.org/grids/g/model-translation/).
    
@@ -97,8 +97,8 @@ use the same Django management command: `makemessages`
 
 `python manage.py makemessages`
 
-Running this command will now work the same as the original Django's `makemessages` command but also collects all 
-messages from the `TransField` model fields and add the to your po file.
+Running this command will work the same as the original Django's `makemessages` command but as an addition aslo collects all 
+messages from the `TransField` model fields and add them to your po file.
 
 If you need to run the original `makemessages` command without colleting the `TransField` messages pass in the following 
 option:

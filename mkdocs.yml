@@ -2,7 +2,8 @@ site_name: Django L10N extensions
 pages:
     - Home: index.md
     - T9N (Translation): t9n.md
-    - L10N Units of measure: l10n_units.md
+    - Units of measure: units_of_measure.md
+    - Units of measure L10N: units_of_measure_l10n.md
 
 theme: readthedocs
 

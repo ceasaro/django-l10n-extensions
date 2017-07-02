@@ -1,0 +1,124 @@
+{
+    "docs": [
+        {
+            "location": "/", 
+            "text": "Welcome to the django-l10n-extensions documentation!\n\n\nDjango l10n extensions contains some L10N \n(Localization)\n\nextensions. If you are interested some more background information about localization read this article about \n\nGILT\n (G11N, I18N, L10N and T9N)\n\n\nThis library extends your Django framework with translatable model fields, international unit measure fields, and more!\n\n\nInterested in the source code check out our \nrepo on github\n.\n\n\nGetting started\n\n\nYou can get django-l10n-extensions using \npip\n\n\n$ pip install django-l10n-extensions\n\n\nInstallation\n\n\nTo enable django_l10n_extensions in your project you need to add it to INSTALLED_APPS in your projects settings.py file:\n\n\nINSTALLED_APPS = (\n    ...\n    'django_l10n_extensions',\n    ...\n)", 
+            "title": "Home"
+        }, 
+        {
+            "location": "/#welcome-to-the-django-l10n-extensions-documentation", 
+            "text": "Django l10n extensions contains some L10N  (Localization) \nextensions. If you are interested some more background information about localization read this article about  GILT  (G11N, I18N, L10N and T9N)  This library extends your Django framework with translatable model fields, international unit measure fields, and more!  Interested in the source code check out our  repo on github .", 
+            "title": "Welcome to the django-l10n-extensions documentation!"
+        }, 
+        {
+            "location": "/#getting-started", 
+            "text": "You can get django-l10n-extensions using  pip  $ pip install django-l10n-extensions", 
+            "title": "Getting started"
+        }, 
+        {
+            "location": "/#installation", 
+            "text": "To enable django_l10n_extensions in your project you need to add it to INSTALLED_APPS in your projects settings.py file:  INSTALLED_APPS = (\n    ...\n    'django_l10n_extensions',\n    ...\n)", 
+            "title": "Installation"
+        }, 
+        {
+            "location": "/t9n/", 
+            "text": "TransField Model Field extension\n\n\nThis Django model field translates content stored in your database using the same approach as the standard django \n translation methods like \ngettext\n, \npgettest\n, \nngettest\n and \nnpgexttest\n \n (see the \nDjango 1.11 translation\n)\n\n\nTo Collect the messages of the \nTransField\n stored in the database simply run: \n\n\npython manage.py makemessages\n\n\n!NOTE\n This is not meant to translate user generated content, it's more suitable for static text stored in a database.\nThink of a list of products or some definition list that needs to be translated. There are other libraries probably more \nsuitable for translating user generated content take a look a these \n\nlibraries\n.\n\n\nsimple text\n\n\nequivalent to Django's \ngettext(message)\n\n\ntitle = TransField(max_length=128)\n\n\n\n\nThe string from the title model field will be translated like any message passed through the Django's \ngettext()\n method.\nBelow a complete example:\n\n\nclass Product(models.Model):\n    name = TransField(max_length=128)\n\nproduct = Product(name='Spring')\nproduct.name \u2192 'Spring'\n\nactivate('nl')\n\nproduct.name \u2192 'Lente'\n\n\n\n\ntranslate with context\n\n\nEquivalent to Django's \npgettext(context, message)\n\n\nYou can use the same \nTransField\n as above but pass in an extra context message.\n\n\nclass Product(models.Model):\n    name = TransField(max_length=128)\n\nproduct = Product(name=('mechanical device', 'spring'))  # pass in a tuple (context, message)\nproduct.name \u2192 'spring'\n\nactivate('nl')\n\nproduct.name \u2192 'veer'  # not Lente cause the context says it's a mechanical device!\n\n\n\n\ntranslate plural\n\n\nequivalent to Django's \npgettext(singular, plural)\n\n\nYou can still use the same \nTransField\n as the above examples, but the argument passed to the field has now a dict style.\n\n\nclass Product(models.Model):\n    name = TransField(max_length=128)\n\nproduct = Product(name={'msgid':'car', 'plural':'cars'})  # pass in a T9N dict\nproduct.name.trans(0) \u2192 'cars'\nproduct.name.trans(1) \u2192 'car'\nproduct.name.trans(4) \u2192 'cars'\n\nactivate('nl')\n\nproduct.name.trans(0) \u2192 'autos' \nproduct.name.trans(1) \u2192 'auto' \nproduct.name.trans(4) \u2192 'autos' \n\n\n\n\ntranslate plural with context\n\n\nequivalent to Django's \nngettext(context, singular, plural)\n\n\nWe still use the same \nTransField\n as the above examples :-), and pass in dict style argument.\n\n\nclass Product(models.Model):\n    name = TransField(max_length=128)\n\nproduct = Product(name={'msgid':'spring', 'plural':'springs', 'msgctxt': 'mechanical device'})  # pass in a T9N dict\nproduct.name.trans(0) \u2192 'springs'\nproduct.name.trans(1) \u2192 'spring'\nproduct.name.trans(4) \u2192 'springs'\n\nactivate('nl')\n\nproduct.name.trans(0) \u2192 'veren' \nproduct.name.trans(1) \u2192 'veer' \nproduct.name.trans(4) \u2192 'veren' \n\n\n\n\nMake the messages.\n\n\nTo make the messages, that is add the messages stored in the database to the po file so they can be translated, you can \nuse the same Django management command: \nmakemessages\n\n\npython manage.py makemessages\n\n\nRunning this command will work the same as the original Django's \nmakemessages\n command but as an addition aslo collects all \nmessages from the \nTransField\n model fields and add them to your po file.\n\n\nIf you need to run the original \nmakemessages\n command without colleting the \nTransField\n messages pass in the following \noption:\n\n\npython manage.py makemessages --no-models\n\n\nIf you which to only collect the messages of the \nTransField\n model fields run:\n\n\npython manage.py makemessages --models-only", 
+            "title": "T9N (Translation)"
+        }, 
+        {
+            "location": "/t9n/#transfield-model-field-extension", 
+            "text": "This Django model field translates content stored in your database using the same approach as the standard django \n translation methods like  gettext ,  pgettest ,  ngettest  and  npgexttest  \n (see the  Django 1.11 translation )  To Collect the messages of the  TransField  stored in the database simply run:   python manage.py makemessages  !NOTE  This is not meant to translate user generated content, it's more suitable for static text stored in a database.\nThink of a list of products or some definition list that needs to be translated. There are other libraries probably more \nsuitable for translating user generated content take a look a these  libraries .", 
+            "title": "TransField Model Field extension"
+        }, 
+        {
+            "location": "/t9n/#simple-text", 
+            "text": "equivalent to Django's  gettext(message)  title = TransField(max_length=128)  The string from the title model field will be translated like any message passed through the Django's  gettext()  method.\nBelow a complete example:  class Product(models.Model):\n    name = TransField(max_length=128)\n\nproduct = Product(name='Spring')\nproduct.name \u2192 'Spring'\n\nactivate('nl')\n\nproduct.name \u2192 'Lente'", 
+            "title": "simple text"
+        }, 
+        {
+            "location": "/t9n/#translate-with-context", 
+            "text": "Equivalent to Django's  pgettext(context, message)  You can use the same  TransField  as above but pass in an extra context message.  class Product(models.Model):\n    name = TransField(max_length=128)\n\nproduct = Product(name=('mechanical device', 'spring'))  # pass in a tuple (context, message)\nproduct.name \u2192 'spring'\n\nactivate('nl')\n\nproduct.name \u2192 'veer'  # not Lente cause the context says it's a mechanical device!", 
+            "title": "translate with context"
+        }, 
+        {
+            "location": "/t9n/#translate-plural", 
+            "text": "equivalent to Django's  pgettext(singular, plural)  You can still use the same  TransField  as the above examples, but the argument passed to the field has now a dict style.  class Product(models.Model):\n    name = TransField(max_length=128)\n\nproduct = Product(name={'msgid':'car', 'plural':'cars'})  # pass in a T9N dict\nproduct.name.trans(0) \u2192 'cars'\nproduct.name.trans(1) \u2192 'car'\nproduct.name.trans(4) \u2192 'cars'\n\nactivate('nl')\n\nproduct.name.trans(0) \u2192 'autos' \nproduct.name.trans(1) \u2192 'auto' \nproduct.name.trans(4) \u2192 'autos'", 
+            "title": "translate plural"
+        }, 
+        {
+            "location": "/t9n/#translate-plural-with-context", 
+            "text": "equivalent to Django's  ngettext(context, singular, plural)  We still use the same  TransField  as the above examples :-), and pass in dict style argument.  class Product(models.Model):\n    name = TransField(max_length=128)\n\nproduct = Product(name={'msgid':'spring', 'plural':'springs', 'msgctxt': 'mechanical device'})  # pass in a T9N dict\nproduct.name.trans(0) \u2192 'springs'\nproduct.name.trans(1) \u2192 'spring'\nproduct.name.trans(4) \u2192 'springs'\n\nactivate('nl')\n\nproduct.name.trans(0) \u2192 'veren' \nproduct.name.trans(1) \u2192 'veer' \nproduct.name.trans(4) \u2192 'veren'", 
+            "title": "translate plural with context"
+        }, 
+        {
+            "location": "/t9n/#make-the-messages", 
+            "text": "To make the messages, that is add the messages stored in the database to the po file so they can be translated, you can \nuse the same Django management command:  makemessages  python manage.py makemessages  Running this command will work the same as the original Django's  makemessages  command but as an addition aslo collects all \nmessages from the  TransField  model fields and add them to your po file.  If you need to run the original  makemessages  command without colleting the  TransField  messages pass in the following \noption:  python manage.py makemessages --no-models  If you which to only collect the messages of the  TransField  model fields run:  python manage.py makemessages --models-only", 
+            "title": "Make the messages."
+        }, 
+        {
+            "location": "/units_of_measure/", 
+            "text": "Units of measure\n\n\nMeasure can be expressed in serveral units, e.g. distance can be in meters, yards, km, miles, etc. This extention\nmakes is easy to convert a measure in an other unit, see example below.\n\n\nUnits of measures are different in serveral countries. While most countries use the metric system, there are \ncountries using other unities for measures. This extention also make it possible to automatically convert a measure\ninto the unit used for that country. See \nUnits of measure L10N\n\n\nDjango-l10n-extensions have unit conversion/localization for the following measures:\n\n\n\n\nDistance (meters, yards, km, miles, etc.)\n\n\nWeight (gram, pound, tonnes, short tons, etc.)\n\n\nArea (square meter, square foot, hectare, acre, etc.)\n\n\nVolume (liter, gallon, cubic dm, cubic gallon, etc.)\n\n\nTemperature (Celsius, Fahrenheit, Kelvin)\n\n\nVelocity (meter/sec., km/hour, miles/hour)\n\n\nPrecipitation (millimeter, inches)\n\n\n\n\nNOTE\n:\nThe \nMeasure\n-classes are inspired by and build on the \ndjango.contrib.gis.measure\n package.\n\n\nDistance\n\n\nconvert distance to any other unit, see \nDistance.UNITS.keys()\n for all supported units\n\n\nexample\n\n\nDistance(3).m == 3.0\nDistance(m=4).m == 4.0\nDistance(m=4).km == 0.004\nDistance(m=4).yard == 4.374453193350831\n\n\n\n\nWeight\n\n\nconvert weight to any other unit, see \nWeight.UNITS.keys()\n for all supported units\n\n\nexample\n\n\nweight = Weight(g=3)\nweight.g \u2192 3.0\nweight.mg \u2192 3000.0\nweight.lb \u2192 0.006613867865546327  # pounds\n\n\n\n\nArea\n\n\nconvert area to any other unit, see \nArea.UNITS.keys()\n for all supported units\n\n\nexample\n\n\nweight = Area(ha=20)\nweight.ha \u2192 20.0\nweight.sq_m \u2192 200000.0  # square meter\nweight.sq_yd \u2192 239198.00926021606  # square yard\nweight.feddan \u2192 47.62\n\n\n\n\nVolume\n\n\nconvert volume to any other unit, see \nVolume.UNITS.keys()\n for all supported units\n\n\nexample\n\n\nvolume = Volume(l=1)\nvolume.l \u2192 1.0\nvolume.cu_dm \u2192 0.9999999999999998  # square meter, rounding due to conversions with floats\nvolume.sq_yd \u2192 239198.00926021606  # square yard\nvolume.feddan \u2192 47.62\n\n\n\n\nTemperature\n\n\nconvert temperature to any other unit, see \nTemperature.UNITS.keys()\n for all supported units\n\n\nexample\n\n\ntemperature = Temperature(C=5)\ntemperature.C \u2192 5.0  # Celsius\ntemperature.F \u2192 41.0  # Fahrenheit\ntemperature.K \u2192 278.15  # Kelvin\n\n\n\n\nVelocity\n\n\nconvert velocity to any other unit, see \nVelocity.UNITS.keys()\n for all supported units\n\n\nexample\n\n\nvelocity = Velocity(mps=6)\nvelocity.mps \u2192 6.0  # Meter / second\nvelocity.mph \u2192 13.421617752326414  # Miles / hour\nvelocity.mph \u2192 21.599999999999998  # km / hour, rounding due to conversions with floats\n\n\n\n\nPrecipitation\n\n\nconvert precipitation to any other unit, see \nPrecipitation0.UNITS.keys()\n for all supported units\n\n\nexample\n\n\nprecipitation = Precipitation(mps=2.4)\nprecipitation.mm \u2192 2.4  # millimeter\nprecipitation.inch \u2192 0.09448818897637795  # inches", 
+            "title": "Units of measure"
+        }, 
+        {
+            "location": "/units_of_measure/#units-of-measure", 
+            "text": "Measure can be expressed in serveral units, e.g. distance can be in meters, yards, km, miles, etc. This extention\nmakes is easy to convert a measure in an other unit, see example below.  Units of measures are different in serveral countries. While most countries use the metric system, there are \ncountries using other unities for measures. This extention also make it possible to automatically convert a measure\ninto the unit used for that country. See  Units of measure L10N  Django-l10n-extensions have unit conversion/localization for the following measures:   Distance (meters, yards, km, miles, etc.)  Weight (gram, pound, tonnes, short tons, etc.)  Area (square meter, square foot, hectare, acre, etc.)  Volume (liter, gallon, cubic dm, cubic gallon, etc.)  Temperature (Celsius, Fahrenheit, Kelvin)  Velocity (meter/sec., km/hour, miles/hour)  Precipitation (millimeter, inches)   NOTE :\nThe  Measure -classes are inspired by and build on the  django.contrib.gis.measure  package.", 
+            "title": "Units of measure"
+        }, 
+        {
+            "location": "/units_of_measure/#distance", 
+            "text": "convert distance to any other unit, see  Distance.UNITS.keys()  for all supported units  example  Distance(3).m == 3.0\nDistance(m=4).m == 4.0\nDistance(m=4).km == 0.004\nDistance(m=4).yard == 4.374453193350831", 
+            "title": "Distance"
+        }, 
+        {
+            "location": "/units_of_measure/#weight", 
+            "text": "convert weight to any other unit, see  Weight.UNITS.keys()  for all supported units  example  weight = Weight(g=3)\nweight.g \u2192 3.0\nweight.mg \u2192 3000.0\nweight.lb \u2192 0.006613867865546327  # pounds", 
+            "title": "Weight"
+        }, 
+        {
+            "location": "/units_of_measure/#area", 
+            "text": "convert area to any other unit, see  Area.UNITS.keys()  for all supported units  example  weight = Area(ha=20)\nweight.ha \u2192 20.0\nweight.sq_m \u2192 200000.0  # square meter\nweight.sq_yd \u2192 239198.00926021606  # square yard\nweight.feddan \u2192 47.62", 
+            "title": "Area"
+        }, 
+        {
+            "location": "/units_of_measure/#volume", 
+            "text": "convert volume to any other unit, see  Volume.UNITS.keys()  for all supported units  example  volume = Volume(l=1)\nvolume.l \u2192 1.0\nvolume.cu_dm \u2192 0.9999999999999998  # square meter, rounding due to conversions with floats\nvolume.sq_yd \u2192 239198.00926021606  # square yard\nvolume.feddan \u2192 47.62", 
+            "title": "Volume"
+        }, 
+        {
+            "location": "/units_of_measure/#temperature", 
+            "text": "convert temperature to any other unit, see  Temperature.UNITS.keys()  for all supported units  example  temperature = Temperature(C=5)\ntemperature.C \u2192 5.0  # Celsius\ntemperature.F \u2192 41.0  # Fahrenheit\ntemperature.K \u2192 278.15  # Kelvin", 
+            "title": "Temperature"
+        }, 
+        {
+            "location": "/units_of_measure/#velocity", 
+            "text": "convert velocity to any other unit, see  Velocity.UNITS.keys()  for all supported units  example  velocity = Velocity(mps=6)\nvelocity.mps \u2192 6.0  # Meter / second\nvelocity.mph \u2192 13.421617752326414  # Miles / hour\nvelocity.mph \u2192 21.599999999999998  # km / hour, rounding due to conversions with floats", 
+            "title": "Velocity"
+        }, 
+        {
+            "location": "/units_of_measure/#precipitation", 
+            "text": "convert precipitation to any other unit, see  Precipitation0.UNITS.keys()  for all supported units  example  precipitation = Precipitation(mps=2.4)\nprecipitation.mm \u2192 2.4  # millimeter\nprecipitation.inch \u2192 0.09448818897637795  # inches", 
+            "title": "Precipitation"
+        }, 
+        {
+            "location": "/units_of_measure_l10n/", 
+            "text": "Units of measure L10N\n\n\nSee \nUnits of measure\n for all available measures in django l10n extensions.\n\n\nL10N class\n\n\nDjango L10N extensions comes with an \nL10n\n class. This \nL10n\n class contains a setting for every available measure in\ndjango L10N extensions.\n\n\nbelow an L10N example of the default L10n settings of none is activated.:\n\n\nDEFAULT_L10N = L10n(\n    unit_distance=Distance.METER,\n    unit_area=Area.SQUARE_METER,\n    unit_weight=Weight.GRAM,\n    unit_volume=Volume.LITER,\n    unit_temp=Temperature.CELSIUS,\n    unit_velocity=Velocity.MPS,\n    unit_precipitation=Precipitation.MM\n)\n\n\n\n\nOn every Measure class you can request the l10n value of that measure e.g.:\n\n\ndistance = Distance(11)\ndistance.l10n \u2192 '11.00 m'  # complete representation\ndistance.l10n_value \u2192 11  # only the value\ndistance.l10n_unit \u2192 'm'  # only the unit\ndistance.as_l10n(decimal_pos=0) \u2192 '11 m'  # specify the precision\n\n\n\n\nTo create an L10n for e.g. the United States see below:\n\n\nl10n_us = L10n(\n    unit_distance=Distance.YARD,\n    unit_area=Area.SQUARE_FOOT,\n    unit_volume=Volume.GALLON,\n    unit_weight=Weight.POUND,\n    unit_temp=Temperature.FAHRENHEIT,\n    unit_velocity=Velocity.MPH,\n    unit_precipitation=Precipitation.INCH,\n)\n\n\n\n\nTo activate an L10n object you can use the same approach as with django translations and use \na simular \nactivate\n method.\n\n\nfrom django_l10n_extensions.l10n_threading import activate\n\ndistance = Distance(m=11)\nactivate(l10n_us)\n\ndistance.l10n \u2192 '12.02 yard'\ndistance.l10n_value \u2192 12.02974\ndistance.l10n_unit \u2192 'yard'\n\n\n\n\nDjango middleware to active L10n for a user (TODO)\n\n\nWe still need to implement some middleware to activate an \nL10n\n instance for a given user. \n\n\nTODO: add \nL10n\n instances for all countries.", 
+            "title": "Units of measure L10N"
+        }, 
+        {
+            "location": "/units_of_measure_l10n/#units-of-measure-l10n", 
+            "text": "See  Units of measure  for all available measures in django l10n extensions.", 
+            "title": "Units of measure L10N"
+        }, 
+        {
+            "location": "/units_of_measure_l10n/#l10n-class", 
+            "text": "Django L10N extensions comes with an  L10n  class. This  L10n  class contains a setting for every available measure in\ndjango L10N extensions.  below an L10N example of the default L10n settings of none is activated.:  DEFAULT_L10N = L10n(\n    unit_distance=Distance.METER,\n    unit_area=Area.SQUARE_METER,\n    unit_weight=Weight.GRAM,\n    unit_volume=Volume.LITER,\n    unit_temp=Temperature.CELSIUS,\n    unit_velocity=Velocity.MPS,\n    unit_precipitation=Precipitation.MM\n)  On every Measure class you can request the l10n value of that measure e.g.:  distance = Distance(11)\ndistance.l10n \u2192 '11.00 m'  # complete representation\ndistance.l10n_value \u2192 11  # only the value\ndistance.l10n_unit \u2192 'm'  # only the unit\ndistance.as_l10n(decimal_pos=0) \u2192 '11 m'  # specify the precision  To create an L10n for e.g. the United States see below:  l10n_us = L10n(\n    unit_distance=Distance.YARD,\n    unit_area=Area.SQUARE_FOOT,\n    unit_volume=Volume.GALLON,\n    unit_weight=Weight.POUND,\n    unit_temp=Temperature.FAHRENHEIT,\n    unit_velocity=Velocity.MPH,\n    unit_precipitation=Precipitation.INCH,\n)  To activate an L10n object you can use the same approach as with django translations and use \na simular  activate  method.  from django_l10n_extensions.l10n_threading import activate\n\ndistance = Distance(m=11)\nactivate(l10n_us)\n\ndistance.l10n \u2192 '12.02 yard'\ndistance.l10n_value \u2192 12.02974\ndistance.l10n_unit \u2192 'yard'", 
+            "title": "L10N class"
+        }, 
+        {
+            "location": "/units_of_measure_l10n/#django-middleware-to-active-l10n-for-a-user-todo", 
+            "text": "We still need to implement some middleware to activate an  L10n  instance for a given user.   TODO: add  L10n  instances for all countries.", 
+            "title": "Django middleware to active L10n for a user (TODO)"
+        }
+    ]
+}

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Units of measure - Django L10N extensions</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Units of measure";
+    var mkdocs_page_input_path = "units_of_measure.md";
+    var mkdocs_page_url = "/units_of_measure/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Django L10N extensions</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../t9n/">T9N (Translation)</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Units of measure</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#units-of-measure">Units of measure</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#distance">Distance</a></li>
+        
+            <li><a class="toctree-l3" href="#weight">Weight</a></li>
+        
+            <li><a class="toctree-l3" href="#area">Area</a></li>
+        
+            <li><a class="toctree-l3" href="#volume">Volume</a></li>
+        
+            <li><a class="toctree-l3" href="#temperature">Temperature</a></li>
+        
+            <li><a class="toctree-l3" href="#velocity">Velocity</a></li>
+        
+            <li><a class="toctree-l3" href="#precipitation">Precipitation</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../units_of_measure_l10n/">Units of measure L10N</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Django L10N extensions</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Units of measure</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="units-of-measure">Units of measure</h2>
+<p>Measure can be expressed in serveral units, e.g. distance can be in meters, yards, km, miles, etc. This extention
+makes is easy to convert a measure in an other unit, see example below.</p>
+<p>Units of measures are different in serveral countries. While most countries use the metric system, there are 
+countries using other unities for measures. This extention also make it possible to automatically convert a measure
+into the unit used for that country. See <a href="../units_of_measure_l10n/">Units of measure L10N</a></p>
+<p>Django-l10n-extensions have unit conversion/localization for the following measures:</p>
+<ol>
+<li>Distance (meters, yards, km, miles, etc.)</li>
+<li>Weight (gram, pound, tonnes, short tons, etc.)</li>
+<li>Area (square meter, square foot, hectare, acre, etc.)</li>
+<li>Volume (liter, gallon, cubic dm, cubic gallon, etc.)</li>
+<li>Temperature (Celsius, Fahrenheit, Kelvin)</li>
+<li>Velocity (meter/sec., km/hour, miles/hour)</li>
+<li>Precipitation (millimeter, inches)</li>
+</ol>
+<p><strong>NOTE</strong>:
+The <code>Measure</code>-classes are inspired by and build on the <code>django.contrib.gis.measure</code> package.</p>
+<h3 id="distance">Distance</h3>
+<p>convert distance to any other unit, see <code>Distance.UNITS.keys()</code> for all supported units</p>
+<p><em>example</em></p>
+<pre><code class="python">Distance(3).m == 3.0
+Distance(m=4).m == 4.0
+Distance(m=4).km == 0.004
+Distance(m=4).yard == 4.374453193350831
+</code></pre>
+
+<h3 id="weight">Weight</h3>
+<p>convert weight to any other unit, see <code>Weight.UNITS.keys()</code> for all supported units</p>
+<p><em>example</em></p>
+<pre><code class="python">weight = Weight(g=3)
+weight.g → 3.0
+weight.mg → 3000.0
+weight.lb → 0.006613867865546327  # pounds
+</code></pre>
+
+<h3 id="area">Area</h3>
+<p>convert area to any other unit, see <code>Area.UNITS.keys()</code> for all supported units</p>
+<p><em>example</em></p>
+<pre><code class="python">weight = Area(ha=20)
+weight.ha → 20.0
+weight.sq_m → 200000.0  # square meter
+weight.sq_yd → 239198.00926021606  # square yard
+weight.feddan → 47.62
+</code></pre>
+
+<h3 id="volume">Volume</h3>
+<p>convert volume to any other unit, see <code>Volume.UNITS.keys()</code> for all supported units</p>
+<p><em>example</em></p>
+<pre><code class="python">volume = Volume(l=1)
+volume.l → 1.0
+volume.cu_dm → 0.9999999999999998  # square meter, rounding due to conversions with floats
+volume.sq_yd → 239198.00926021606  # square yard
+volume.feddan → 47.62
+</code></pre>
+
+<h3 id="temperature">Temperature</h3>
+<p>convert temperature to any other unit, see <code>Temperature.UNITS.keys()</code> for all supported units</p>
+<p><em>example</em></p>
+<pre><code class="python">temperature = Temperature(C=5)
+temperature.C → 5.0  # Celsius
+temperature.F → 41.0  # Fahrenheit
+temperature.K → 278.15  # Kelvin
+</code></pre>
+
+<h3 id="velocity">Velocity</h3>
+<p>convert velocity to any other unit, see <code>Velocity.UNITS.keys()</code> for all supported units</p>
+<p><em>example</em></p>
+<pre><code class="python">velocity = Velocity(mps=6)
+velocity.mps → 6.0  # Meter / second
+velocity.mph → 13.421617752326414  # Miles / hour
+velocity.mph → 21.599999999999998  # km / hour, rounding due to conversions with floats
+</code></pre>
+
+<h3 id="precipitation">Precipitation</h3>
+<p>convert precipitation to any other unit, see <code>Precipitation0.UNITS.keys()</code> for all supported units</p>
+<p><em>example</em></p>
+<pre><code class="python">precipitation = Precipitation(mps=2.4)
+precipitation.mm → 2.4  # millimeter
+precipitation.inch → 0.09448818897637795  # inches
+</code></pre>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../units_of_measure_l10n/" class="btn btn-neutral float-right" title="Units of measure L10N">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../t9n/" class="btn btn-neutral" title="T9N (Translation)"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+    
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../t9n/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../units_of_measure_l10n/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script src="../js/theme.js"></script>
+
+</body>
+</html>

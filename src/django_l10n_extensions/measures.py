@@ -87,7 +87,7 @@ class Distance(MeasureL10nBase, GisDistance):
     UNITS = GisDistance.UNITS.copy()
     UNITS.update({
         'hm': 100,
-        'dm': 100,
+        'dm': 0.1,
     })
 
     def __init__(self, value=None, default_unit=DEFAULT_UNIT, **kwargs):
@@ -222,7 +222,7 @@ class Volume(MeasureL10nBase):
 
     DEFAULT_UNIT = LITER
     STANDARD_UNIT = VOLUME_PREFIX + Distance.STANDARD_UNIT  # this is the base unit and its value is used to recalculate other unit values
-    UNITS = {'%s%s' % (VOLUME_PREFIX, k): v ** 2 for k, v in Distance.UNITS.items()}
+    UNITS = {'%s%s' % (VOLUME_PREFIX, k): v ** 3 for k, v in Distance.UNITS.items()}
     UNITS.update({
         LITER: 0.001,
         GALLON: 0.00378541178,

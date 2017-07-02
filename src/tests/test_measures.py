@@ -27,6 +27,7 @@ def test_compare_area_operations():
 
 def test_constructors():
     assert Distance(3).m == 3
+    assert Distance(3).dm == 30
     assert Distance(m=4).m == 4
 
     assert Distance({'unit':'m', 'value':3}).m, 3
@@ -34,7 +35,7 @@ def test_constructors():
         assert Distance({'distance':'m', 'value':3}).m == 3
 
 
-def test_weieght():
+def test_weight():
     assert Weight(1).g == 1
     assert Weight(kg=1).g == 1000
     assert abs(Weight(kg=4.5).us_ton - 0.0049604009) < 0.00001
@@ -44,10 +45,11 @@ def test_weieght():
 
 def test_volume():
     assert Volume(1).l == 1
+    assert abs(Volume(l=1).cu_dm - 1) < 0.000001
     assert Volume(gal=1).l == 3.78541178
     assert abs(Volume(ml=44).gal - 0.0116235703) < 0.0001
     assert Volume(cu_m=5).l == 5000
-    assert Volume(cu_yd=3).cu_yd == 3
+    assert abs(Volume(cu_yd=3).cu_yd - 3) < 0.000001
 
 
 def test_temperature():

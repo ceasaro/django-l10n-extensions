@@ -5,7 +5,7 @@ from django.utils.translation import ugettext, pgettext, npgettext, ngettext
 
 from django_l10n_extensions.forms import fields
 from django_l10n_extensions.exceptions import L10NException
-from django_l10n_extensions.models import measures
+from django_l10n_extensions import measures
 
 
 class T9N(object):

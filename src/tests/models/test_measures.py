@@ -1,8 +1,7 @@
 # coding=utf-8
 import pytest
 
-from django_l10n_extensions.l10n_threading import activate as activate_l10n, deactivate as deactivate_l10n
-from django_l10n_extensions.models.measures import Distance, Area, Volume, Weight, Temperature
+from django_l10n_extensions.measures import Distance, Area, Volume, Weight, Temperature
 
 
 def test_compare_area_operations():

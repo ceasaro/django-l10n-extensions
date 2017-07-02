@@ -10,7 +10,7 @@ django.setup()
 import pytest
 from django.utils.translation import pgettext, gettext, ngettext, npgettext
 
-from django_l10n_extensions.models import measures
+from django_l10n_extensions import measures
 from django_l10n_extensions.models.models import L10n
 
 

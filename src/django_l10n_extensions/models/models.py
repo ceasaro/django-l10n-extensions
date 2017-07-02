@@ -1,6 +1,6 @@
 from django.db import models
 
-from django_l10n_extensions.models import measures
+from django_l10n_extensions import measures
 
 
 class L10n(models.Model):

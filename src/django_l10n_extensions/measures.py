@@ -348,7 +348,7 @@ class Velocity(MeasureL10nBase):
 
 class Precipitation(MeasureL10nBase):
     MM = u'mm'
-    INCH = u'in'
+    INCH = u'inch'
 
     DEFAULT_UNIT = MM
     STANDARD_UNIT = MM  # this is the base unit and its value is used to recalculate other unit values
@@ -361,8 +361,6 @@ class Precipitation(MeasureL10nBase):
         u'mm water': MM,
         u'inch': INCH,
         u'inches water': INCH,
-        u'in': INCH,
-        u'"': INCH,
     }
     LALIAS = {k.lower(): v for k, v in ALIAS.items()}
     UNITS_REPR = {

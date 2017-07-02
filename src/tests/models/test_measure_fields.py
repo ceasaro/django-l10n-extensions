@@ -128,6 +128,6 @@ def test_precipitation(l10n_nl, l10n_eg, l10n_us):
 
     assert l10n_nl.unit_precipitation == 'mm'
     assert l10n_eg.unit_precipitation == 'mm'
-    assert l10n_us.unit_precipitation == 'in'
+    assert l10n_us.unit_precipitation == 'inch'
     deactivate_l10n()
 

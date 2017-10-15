@@ -1,3 +1,4 @@
+beautifulsoup4
 Django==1.9
 django_extensions==1.7.9
 polib==1.0.8

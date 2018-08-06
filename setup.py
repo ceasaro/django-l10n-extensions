@@ -7,7 +7,7 @@ setup(
     author_email='ceesvw@gmail.com',
     packages=find_packages(),
     include_package_data=True,
-    install_requires=['GitPython==1.0.1', ],
+    install_requires=['GitPython==1.0.1', 'Django>=2', ],
     url='https://github.com/ceasaro/django-l10n-extensions',
     license='',
     description=open('DESCRIPTION').read(),

@@ -34,7 +34,7 @@ class Crawler(object):
         if page is None:
             page = self.curl(url)
         else:
-            print "cached url... [%s] %s" % (self.domain, url)
+            print("cached url... [%s] %s" % (self.domain, url))
         return page
 
     def is_cacheable(self, url):
@@ -58,10 +58,10 @@ class Crawler(object):
         return empty string if response raise an HTTPError (not found, 500...)
         """
         try:
-            print "retrieving url... [%s] %s" % (self.domain, url)
+            print("retrieving url... [%s] %s" % (self.domain, url))
             req = urllib2.Request('%s://%s%s' % (self.scheme, self.domain, url))
             response = urllib2.urlopen(req)
             return response.read().decode('ascii', 'ignore')
-        except urllib2.HTTPError, e:
-            print "error [%s] %s: %s" % (self.domain, url, e)
+        except urllib2.HTTPError as e:
+            print("error [%s] %s: %s" % (self.domain, url, e))
             return ''

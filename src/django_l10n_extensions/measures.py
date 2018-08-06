@@ -10,13 +10,14 @@ from django_l10n_extensions.l10n_threading import get_l10n
 
 VOLUME_PREFIX = 'cu_'
 
+
 class MeasureL10nBase(MeasureBase):
 
     UNITS_REPR = {}
 
     def __init__(self, value=None, default_unit=None, decimal_pos=2, **kwargs):
         if value is not None:
-            if isinstance(value, NUMERIC_TYPES + (basestring,)):
+            if isinstance(value, NUMERIC_TYPES + (str,)):
                 unit = self.get_unit() or default_unit or self.STANDARD_UNIT
                 kwargs[unit] = value
             else:
@@ -75,7 +76,10 @@ class MeasureL10nBase(MeasureBase):
         return copied_class
 
     def __getattr__(self, name):
-        return super(MeasureL10nBase, self).__getattr__(self.unit_attname(name))
+        try:
+            return super(MeasureL10nBase, self).__getattr__(self.unit_attname(name))
+        except Exception as e:
+            raise AttributeError(e)
 
 
 class Distance(MeasureL10nBase, GisDistance):
@@ -279,7 +283,10 @@ class Temperature(MeasureL10nBase):
     LALIAS = {k.lower(): v for k, v in ALIAS.items()}
 
     def __getattr__(self, name):
-        return self.UNITS[self.unit_attname(name)](self.standard)
+        try:
+            return self.UNITS[self.unit_attname(name)](self.standard)
+        except Exception as e:
+            raise AttributeError(e)
 
     def get_unit(self):
         l10n = get_l10n()

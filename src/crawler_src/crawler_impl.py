@@ -42,11 +42,11 @@ class Crawler(object):
         return empty string if response raise an HTTPError (not found, 500...)
         """
         try:
-            print ("retrieving url... {}".format(url))
+            print("retrieving url... {}".format(url))
             data = urllib2.urlopen(url)
             return BeautifulSoup(data.read(), "html.parser")
         except Exception as e:
-            print ("error {}: {}".format(url, e))
+            print("error {}: {}".format(url, e))
             return None
 
     def get_links(self, url):

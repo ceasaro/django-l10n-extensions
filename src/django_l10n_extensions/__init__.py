@@ -16,13 +16,13 @@ from django.templatetags import i18n
 
 from django_l10n_extensions.po_utils import get_po_entry
 from django_l10n_extensions.settings import use_inline_trans
-from utils import html_escape
+from .utils import html_escape
 
 VERSION = (0, 1, 0)
 
 
 def get_version(svn=False):
-    "Returns the version as a human-format string."
+    """Returns the version as a human-format string."""
     v = '.'.join([str(i) for i in VERSION])
     if svn:
         from django.utils.version import get_svn_revision
@@ -51,7 +51,6 @@ class InlineTranslateNode(i18n.TranslateNode):
         tag_name, msgid = splitted[0], splitted[1]
         value = super(InlineTranslateNode, self).render(context)
         return to_html(msgid[1:-1], value)  # [1:-1] to strip of first and last "-char
-
 
 
 class InlineBlockTranslateNode(i18n.BlockTranslateNode):

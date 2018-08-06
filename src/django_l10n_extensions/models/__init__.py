@@ -1,1 +1,1 @@
-from models import L10n
+from .models import L10n

@@ -12,4 +12,4 @@ The project in maintained on [github](https://github.com/ceasaro/django-l10n-ext
  2) install requirements `pip install -r setup/requirements.txt`
  3) update the version in `./setup.py`, otherwise you will overwrite an already existing version. 
  4) Make a new distribution run: `python setup.py sdist bdist_wheel`
- 5) Optional upload to pypi: `twine upload --repository-url https://test.pypi.org/legacy/ dist/*`
+ 5) Optional upload to pypi TEST: `twine upload --repository-url https://test.pypi.org/legacy/ dist/*`

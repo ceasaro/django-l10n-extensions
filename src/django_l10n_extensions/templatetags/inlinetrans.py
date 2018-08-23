@@ -13,20 +13,13 @@
 # You should have received a copy of the GNU Lesser General Public License
 # along with this programe.  If not, see <http://www.gnu.org/licenses/>.
 
-import sys
-
 from django import template
 from django.conf import settings
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 from django.utils.translation import get_language
 
 from django_l10n_extensions import use_inline_trans
-
-if sys.version_info[0] == 2:
-    string = basestring
-else:
-    string = str
 
 
 register = template.Library()
@@ -47,6 +40,7 @@ def get_language_name(lang):
     for lang_code, lang_name in settings.LANGUAGES:
         if lang == lang_code:
             return lang_name
+
 
 @register.inclusion_tag('inlinetrans/inline_header.html', takes_context=True)
 def inlinetrans_static(context):

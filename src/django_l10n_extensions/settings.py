@@ -25,6 +25,8 @@ Options for this settings::
   * "restart_script <script_path_name>"
 
 """
+from django.core.exceptions import ImproperlyConfigured
+
 DEFAULT_ENABLE_INLINE_TRANS = False
 DEFAULT_AUTO_RELOAD_METHOD = 'test'
 DEFAULT_AUTO_RELOAD_TIME = '5'
@@ -33,9 +35,9 @@ DEFAULT_AUTO_RELOAD_LOG = 'var/log/autoreload_last.log'
 
 def use_inline_trans():
     from django.conf import settings
-    if hasattr(settings, 'ENABLE_INLINE_TRANS'):
+    try:
         return settings.ENABLE_INLINE_TRANS
-    else:
+    except ImproperlyConfigured:
         return DEFAULT_ENABLE_INLINE_TRANS
 
 
@@ -45,24 +47,23 @@ def user_can_update(user):
 
 def get_auto_reload_method():
     from django.conf import settings
-    if hasattr(settings, 'AUTO_RELOAD_METHOD'):
+    try:
         return settings.AUTO_RELOAD_METHOD
-    else:
+    except ImproperlyConfigured:
         return DEFAULT_AUTO_RELOAD_METHOD
 
 
 def get_auto_reload_time():
     from django.conf import settings
-    if hasattr(settings, 'AUTO_RELOAD_TIME'):
+    try:
         return settings.AUTO_RELOAD_TIME
-    else:
+    except ImproperlyConfigured:
         return DEFAULT_AUTO_RELOAD_TIME
 
 
 def get_auto_reload_log():
     from django.conf import settings
-    if hasattr(settings, 'AUTO_RELOAD_LOG'):
+    try:
         return settings.AUTO_RELOAD_LOG
-    else:
+    except ImproperlyConfigured:
         return DEFAULT_AUTO_RELOAD_LOG
-

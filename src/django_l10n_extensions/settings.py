@@ -37,7 +37,7 @@ def use_inline_trans():
     from django.conf import settings
     try:
         return settings.ENABLE_INLINE_TRANS
-    except ImproperlyConfigured:
+    except (ImproperlyConfigured, AttributeError):
         return DEFAULT_ENABLE_INLINE_TRANS
 
 
@@ -49,7 +49,7 @@ def get_auto_reload_method():
     from django.conf import settings
     try:
         return settings.AUTO_RELOAD_METHOD
-    except ImproperlyConfigured:
+    except (ImproperlyConfigured, AttributeError):
         return DEFAULT_AUTO_RELOAD_METHOD
 
 
@@ -57,7 +57,7 @@ def get_auto_reload_time():
     from django.conf import settings
     try:
         return settings.AUTO_RELOAD_TIME
-    except ImproperlyConfigured:
+    except (ImproperlyConfigured, AttributeError):
         return DEFAULT_AUTO_RELOAD_TIME
 
 
@@ -65,5 +65,5 @@ def get_auto_reload_log():
     from django.conf import settings
     try:
         return settings.AUTO_RELOAD_LOG
-    except ImproperlyConfigured:
+    except (ImproperlyConfigured, AttributeError):
         return DEFAULT_AUTO_RELOAD_LOG

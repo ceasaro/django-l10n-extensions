@@ -2,6 +2,7 @@ import pytest
 from django.utils.translation import activate, deactivate
 from django.utils.translation import gettext as _
 
+from django_l10n_extensions.models.fields import T9N
 from tests.conftest import _reload
 from tests.testapp.models import TransTestModel
 
@@ -93,3 +94,8 @@ def test_trans_field_not_assigned():
     # we need to reload the instance from the db, so django converts the varchar value to a I18N object
     t9n_model = _reload(TransTestModel.objects.create())
     assert t9n_model.trans_field == ''
+
+
+def test_t9n_field():
+    assert len(T9N(msgid='test t9n')) == 8
+    assert len(T9N(msgid='test t9n', msgctxt='my context')) == 8

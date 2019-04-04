@@ -39,6 +39,9 @@ class T9N(object):
     def __repr__(self):
         return self.__str__()
 
+    def __len__(self):
+        return len(self.__str__())
+
 
 class TransField(models.CharField):
 

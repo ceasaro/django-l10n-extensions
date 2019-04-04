@@ -62,15 +62,15 @@ class TransField(models.CharField):
             return super(TransField, self).get_prep_value(value)
         data = {}
         if isinstance(value, T9N):
-            data = {'i': T9N.msgid, 'c': T9N.msgctxt, 'p':T9N.msgid_plural}
+            data = {'i': value.msgid, 'c': value.msgctxt, 'p': value.plural}
         elif isinstance(value, (tuple, list)):
-            l = len(value)
-            if l == 1:
+            length = len(value)
+            if length == 1:
                 data['i'] = value[0]
-            elif l == 2:
+            elif length == 2:
                 data['c'] = value[0]
                 data['i'] = value[1]
-            elif l == 3:
+            elif length == 3:
                 data['c'] = value[0]
                 data['i'] = value[1]
                 data['p'] = value[2]

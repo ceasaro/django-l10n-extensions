@@ -1,8 +1,10 @@
+import json
+
 import pytest
 from django.utils.translation import activate, deactivate
 from django.utils.translation import gettext as _
 
-from django_l10n_extensions.models.fields import T9N
+from django_l10n_extensions.models.fields import T9N, TransField
 from tests.conftest import _reload
 from tests.testapp.models import TransTestModel
 
@@ -96,6 +98,15 @@ def test_trans_field_not_assigned():
     assert t9n_model.trans_field == ''
 
 
-def test_t9n_field():
+def test_t9n():
     assert len(T9N(msgid='test t9n')) == 8
     assert len(T9N(msgid='test t9n', msgctxt='my context')) == 8
+
+
+def test_t9n_field():
+    trans_field = TransField(max_length=128, null=False, blank=False)
+    assert json.loads(trans_field.get_prep_value(T9N(msgid='test t9n', msgctxt='my context'))) == {
+        'i': 'test t9n',
+        'c': 'my context',
+        'p': None
+    }

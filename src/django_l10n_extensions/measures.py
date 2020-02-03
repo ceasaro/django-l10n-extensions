@@ -3,7 +3,7 @@ from copy import deepcopy
 
 from django.contrib.gis.measure import MeasureBase, NUMERIC_TYPES, Distance as GisDistance, Area as GisArea, \
     AREA_PREFIX, pretty_name
-from six import iteritems
+import six
 from django.utils.formats import number_format
 
 from django_l10n_extensions.l10n_threading import get_l10n
@@ -300,7 +300,7 @@ class Temperature(MeasureL10nBase):
         """
         val = 0.0
         default_unit = self.STANDARD_UNIT
-        for unit, value in iteritems(kwargs):
+        for unit, value in six.iteritems(kwargs):
             if not isinstance(value, float):
                 value = float(value)
             if unit in self.UNITS:

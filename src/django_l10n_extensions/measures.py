@@ -3,7 +3,7 @@ from copy import deepcopy
 
 from django.contrib.gis.measure import MeasureBase, NUMERIC_TYPES, Distance as GisDistance, Area as GisArea, \
     AREA_PREFIX, pretty_name
-from django.utils import six
+import six
 from django.utils.formats import number_format
 
 from django_l10n_extensions.l10n_threading import get_l10n

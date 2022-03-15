@@ -1,7 +1,7 @@
-beautifulsoup4
-Django==2.1
-django_extensions==1.7.9
-polib==1.0.8
-pytest==3.7.1
-pytest-django==3.3.3
-six==1.13.0
+beautifulsoup4==4.10.0
+Django==3.2.12
+django_extensions==3.1.5
+polib==1.1.1
+pytest==7.1.0
+pytest-django==4.5.2
+six==1.16.0

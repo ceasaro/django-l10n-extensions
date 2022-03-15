@@ -1,8 +1,5 @@
 from setuptools import find_packages, setup
 
-with open("DESCRIPTION.md", "r") as fh:
-    description = fh.read()
-
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
@@ -17,8 +14,7 @@ setup(
     install_requires=['Django>=3.2.12', 'polib>=1.0'],
     url='https://github.com/iamjonmiller/django-l10n-extensions',
     license='',
-    description=description,
-    description_content_type='text/markdown',
+    description="Extend Django 3+ with L10N features",
     long_description=long_description,
     long_description_content_type='text/markdown',
     zip_safe=False,

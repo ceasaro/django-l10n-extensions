@@ -1,7 +1,7 @@
 import json
 
 from django.db import models
-from django.utils.translation import ugettext, pgettext, npgettext, ngettext
+from django.utils.translation import gettext, pgettext, npgettext, ngettext
 
 from django_l10n_extensions.forms import fields
 from django_l10n_extensions.exceptions import L10NException
@@ -19,7 +19,7 @@ class T9N(object):
     def __str__(self):
         if self.msgctxt:
             return pgettext(self.msgctxt, self.msgid)
-        return ugettext(self.msgid)
+        return gettext(self.msgid)
 
     def trans(self, count):
         if self.msgctxt:
@@ -45,7 +45,7 @@ class T9N(object):
 
 class TransField(models.CharField):
 
-    def from_db_value(self, value, expression, connection, context):
+    def from_db_value(self, value, expression, connection):
         return self.to_python(value)
 
     def to_python(self, value):
@@ -94,7 +94,7 @@ class BaseMeasureField(models.FloatField):
             raise L10NException('A DEFAULT_UNIT is required for {0}'.format(self.__class__))
         return self.measure_class(**{unit if unit else self.DEFAULT_UNIT: value})
 
-    def from_db_value(self, value, expression, connection, context):
+    def from_db_value(self, value, expression, connection):
         if type(value) in [float, int]:
             return self.construct_measure(value)
 
@@ -129,7 +129,7 @@ class BaseDecimalMeasureField(models.DecimalField):
             raise L10NException('A DEFAULT_UNIT is required for {0}'.format(self.__class__))
         return self.measure_class(**{unit if unit else self.DEFAULT_UNIT: value})
 
-    def from_db_value(self, value, expression, connection, context):
+    def from_db_value(self, value, expression, connection):
         if type(value) in [float, int]:
             return self.construct_measure(value)
 

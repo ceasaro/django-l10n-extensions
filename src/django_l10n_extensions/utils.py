@@ -12,7 +12,7 @@
 #
 # You should have received a copy of the GNU Lesser General Public License
 # along with this programe.  If not, see <http://www.gnu.org/licenses/>.
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 
 html_escape_table = {
     "&": "&amp;",
@@ -26,5 +26,5 @@ html_escape_table = {
 def html_escape(text):
     if not text:
         return
-    return "".join(html_escape_table.get(c, c) for c in force_text(text))
+    return "".join(html_escape_table.get(c, c) for c in force_str(text))
 

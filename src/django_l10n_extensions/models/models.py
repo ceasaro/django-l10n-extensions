@@ -26,13 +26,13 @@ class L10n(models.Model):
         (precipitation_unit, measures.Precipitation.UNITS_REPR.get(precipitation_unit, precipitation_unit))
         for precipitation_unit in measures.Precipitation.UNITS.keys()]
 
-    unit_distance = models.CharField(choices=DISTANCE_CHOICES, max_length=24, null=True, blank=True)
-    unit_area = models.CharField(choices=AREA_CHOICES, max_length=24, null=True, blank=True)
-    unit_weight= models.CharField(choices=WEIGHT_CHOICES, max_length=24, null=True, blank=True)
-    unit_volume = models.CharField(choices=VOLUME_CHOICES, max_length=24, null=True, blank=True)
-    unit_temp = models.CharField(choices=TEMP_CHOICES, max_length=24, null=True, blank=True)
-    unit_velocity = models.CharField(choices=VELOCITY_CHOICES, max_length=24, null=True, blank=True)
-    unit_precipitation = models.CharField(choices=PRECIPITATION_CHOICES, max_length=24, null=True,
+    unit_distance = models.CharField(choices=DISTANCE_CHOICES, max_length=64, null=True, blank=True)
+    unit_area = models.CharField(choices=AREA_CHOICES, max_length=64, null=True, blank=True)
+    unit_weight = models.CharField(choices=WEIGHT_CHOICES, max_length=64, null=True, blank=True)
+    unit_volume = models.CharField(choices=VOLUME_CHOICES, max_length=64, null=True, blank=True)
+    unit_temp = models.CharField(choices=TEMP_CHOICES, max_length=64, null=True, blank=True)
+    unit_velocity = models.CharField(choices=VELOCITY_CHOICES, max_length=64, null=True, blank=True)
+    unit_precipitation = models.CharField(choices=PRECIPITATION_CHOICES, max_length=64, null=True,
                                           blank=True)
 
     def __unicode__(self):

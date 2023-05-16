@@ -2,7 +2,7 @@ from setuptools import find_packages, setup
 
 setup(
     name='django-l10n-extensions',
-    version='1.0.7',
+    version='1.0.8-alpha',
     author=u'Cees van Wieringen',
     author_email='ceesvw@gmail.com',
     package_dir={'': 'src'},

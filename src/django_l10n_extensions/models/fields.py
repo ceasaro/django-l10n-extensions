@@ -167,6 +167,10 @@ class AreaField(BaseMeasureField):
     measure_class = measures.Area
     DEFAULT_UNIT = measures.Area.DEFAULT_UNIT
 
+    def __init__(self, default_unit=measures.Area.DEFAULT_UNIT, **kwargs):
+        self.DEFAULT_UNIT = default_unit
+        super(BaseMeasureField, self).__init__(**kwargs)
+
     def formfield(self, **kwargs):
         defaults = {'form_class': fields.AreaFormField}
         defaults.update(kwargs)

@@ -31,6 +31,15 @@ DEFAULT_ENABLE_INLINE_TRANS = False
 DEFAULT_AUTO_RELOAD_METHOD = 'test'
 DEFAULT_AUTO_RELOAD_TIME = '5'
 DEFAULT_AUTO_RELOAD_LOG = 'var/log/autoreload_last.log'
+STARLETTE_L10N_STORE = 'starlette_l10n_store'
+
+
+def use_starlette_context():
+    from django.conf import settings
+    try:
+        return settings.L10N_STORE == STARLETTE_L10N_STORE
+    except (ImproperlyConfigured, AttributeError):
+        return False
 
 
 def use_inline_trans():

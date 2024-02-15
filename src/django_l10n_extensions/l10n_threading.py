@@ -24,8 +24,7 @@ def get_l10n():
     if local_l10n:
         return local_l10n
 
-    from django_l10n_extensions.models.models import DEFAULT_L10N
-    l10n = deepcopy(DEFAULT_L10N)
+    l10n = deepcopy(settings.get_default_l10n())
     return l10n
 
 

@@ -76,3 +76,13 @@ def get_auto_reload_log():
         return settings.AUTO_RELOAD_LOG
     except (ImproperlyConfigured, AttributeError):
         return DEFAULT_AUTO_RELOAD_LOG
+
+
+def get_default_l10n():
+    from django.conf import settings
+    try:
+        from django_l10n_extensions.models import L10n
+        return L10n(**settings.DEFAULT_L10N_CONFIG)
+    except (ImproperlyConfigured, AttributeError):
+        from django_l10n_extensions.models.models import DEFAULT_L10N
+        return DEFAULT_L10N

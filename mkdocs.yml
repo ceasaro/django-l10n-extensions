@@ -4,6 +4,7 @@ pages:
     - T9N (Translation): t9n.md
     - Units of measure: units_of_measure.md
     - Units of measure L10N: units_of_measure_l10n.md
+    - Configuration: configuration.md
 
 theme: readthedocs
 

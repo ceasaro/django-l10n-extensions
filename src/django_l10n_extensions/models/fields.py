@@ -119,7 +119,7 @@ class BaseMeasureField(models.FloatField):
             unit = self.measure_class().get_unit()
             if unit != self.DEFAULT_UNIT:
                 measure = self.construct_measure(value, unit=unit)
-                value = measure.default_value
+                value = measure.get_l10n_value(unit=self.DEFAULT_UNIT)
         return value
 
 
@@ -154,7 +154,7 @@ class BaseDecimalMeasureField(models.DecimalField):
             unit = self.measure_class().get_unit()
             if unit != self.DEFAULT_UNIT:
                 measure = self.construct_measure(value, unit=unit)
-                value = measure.default_value
+                value = measure.get_l10n_value(unit=self.DEFAULT_UNIT)
         return value
 
 

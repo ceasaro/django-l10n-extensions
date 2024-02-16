@@ -87,6 +87,11 @@ class BaseMeasureField(models.FloatField):
     measure_class = None
     DEFAULT_UNIT = measures.MeasureBase.STANDARD_UNIT
 
+    def __init__(self, default_unit=None, **kwargs):
+        if default_unit:
+            self.DEFAULT_UNIT = default_unit
+        super(BaseMeasureField, self).__init__(**kwargs)
+
     def construct_measure(self, value, unit=None):
         if not self.measure_class:
             raise L10NException('A measure class is required for {0}'.format(self.__class__))
@@ -166,10 +171,6 @@ class DistanceField(BaseMeasureField):
 class AreaField(BaseMeasureField):
     measure_class = measures.Area
     DEFAULT_UNIT = measures.Area.DEFAULT_UNIT
-
-    def __init__(self, default_unit=measures.Area.DEFAULT_UNIT, **kwargs):
-        self.DEFAULT_UNIT = default_unit
-        super(BaseMeasureField, self).__init__(**kwargs)
 
     def formfield(self, **kwargs):
         defaults = {'form_class': fields.AreaFormField}

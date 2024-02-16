@@ -35,6 +35,9 @@ class L10n(models.Model):
     unit_precipitation = models.CharField(choices=PRECIPITATION_CHOICES, max_length=64, null=True,
                                           blank=True)
 
+    def __str__(self):
+        return self.__unicode__()
+
     def __unicode__(self):
         return u"L10n (Area= {area}) (Distance= {distance}) " \
                u"(Weight= {weight}) (Temperature= {temperature}) (Volume= {volume}) " \

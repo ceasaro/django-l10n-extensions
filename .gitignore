@@ -29,3 +29,6 @@ trello_settings.py
 
 #mkdocs
 site/
+build
+dist
+src/django_l10n_extensions.egg-info

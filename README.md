@@ -14,7 +14,7 @@ The project in maintained on [github](https://github.com/ceasaro/django-l10n-ext
  4) Make a new distribution run: `python setup.py sdist bdist_wheel`
  5) Optional upload to pypi TEST: `twine upload --repository-url https://test.pypi.org/legacy/ dist/*` 
  
- to upload to PRODUCTION remove the `--repository-url` argument (make sure your local `~/.pypirc` is correct)
+ to upload to PRODUCTION you need a token to upload to https://pypi.org/ read https://pypi.org/help/#apitoken
  
 
 # Date and time in python
